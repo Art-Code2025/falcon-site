@@ -20,6 +20,7 @@ function App() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [scrollY, setScrollY] = useState(0);
   const [heroIndex, setHeroIndex] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState<Record<string, boolean>>({});
 
   // refs for sections
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -49,13 +50,14 @@ function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !hasAnimated[entry.target.id]) {
             setIsVisible(prev => ({ ...prev, [entry.target.id]: true }));
+            setHasAnimated(prev => ({ ...prev, [entry.target.id]: true }));
           }
         });
       },
       { 
-        threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
+        threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
       }
     );
@@ -64,7 +66,7 @@ function App() {
     sections.forEach(section => observer.observe(section));
 
     return () => observer.disconnect();
-  }, []);
+  }, [hasAnimated]);
 
   // Hero image slider
   useEffect(() => {

@@ -63,13 +63,19 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
               loading="eager"
               onError={e => { (e.target as HTMLImageElement).src = '/fallback.jpg'; }}
             />
-            {/* Enhanced Overlay Gradient */}
+            {/* Enhanced Overlay Gradient with Silver Effect */}
             {heroIndex === idx && (
               <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-80" />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-transparent to-purple-900/20" />
+                {/* Strong silver overlay for darkening effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-800/70 to-gray-700/40 opacity-90" />
+                {/* Silver metallic effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-500/30 via-slate-400/20 to-slate-600/30" />
+                {/* Additional silver tint for depth */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-300/20 via-transparent to-slate-600/20" />
+                {/* Subtle metallic shimmer */}
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-slate-200/10 to-transparent opacity-50" />
                 {/* Animated particles effect */}
-                <div className="absolute inset-0 opacity-30">
+                <div className="absolute inset-0 opacity-40">
                   {[...Array(20)].map((_, i) => (
                     <div
                       key={i}
@@ -93,15 +99,15 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
         {/* Subtitle with typing effect */}
         <div className={`overflow-hidden mb-4 ${isLoaded ? 'animate-slideInFromTop' : 'opacity-0'}`}>
-          <p className="text-blue-200 text-xs md:text-sm font-medium tracking-widest uppercase animate-fadeInUp delay-100 text-glow">
+          <p className="text-white text-xs md:text-sm font-medium tracking-widest uppercase animate-fadeInUp delay-100 text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             {t('hero.subtitle')}
           </p>
         </div>
 
         {/* Main Title with enhanced effects */}
         <div className={`overflow-hidden mb-6 ${isLoaded ? 'animate-slideInFromTop delay-200' : 'opacity-0'}`}>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] animate-fadeInUp delay-300">
-            <span className="block animate-gradient-text bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent text-glow-strong">
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] animate-fadeInUp delay-300">
+            <span className="block animate-gradient-text bg-gradient-to-r from-white via-white to-white bg-clip-text text-transparent text-glow-strong drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               {t('hero.title')}
             </span>
           </h1>
@@ -109,7 +115,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
 
         {/* Description with staggered animation */}
         <div className={`overflow-hidden mb-8 ${isLoaded ? 'animate-slideInFromTop delay-400' : 'opacity-0'}`}>
-          <p className="text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed animate-fadeInUp delay-500">
+          <p className="text-white text-lg md:text-xl max-w-2xl leading-relaxed animate-fadeInUp delay-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             {t('hero.description')}
           </p>
         </div>
@@ -139,13 +145,13 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
       <div className="absolute bottom-8 left-0 right-0 hidden md:block z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2 text-sm text-gray-200 animate-fadeInUp delay-800">
-              <div className="w-px h-8 bg-gradient-to-b from-transparent via-gray-400 to-transparent"></div>
-              <span className="font-medium text-glow">{t('hero.investmentCriteria')}</span>
+            <div className="flex items-center space-x-2 text-sm text-white animate-fadeInUp delay-800">
+              <div className="w-px h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
+              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t('hero.investmentCriteria')}</span>
             </div>
-            <div className="flex items-center space-x-2 text-sm text-gray-200 animate-fadeInUp delay-900">
-              <span className="font-medium text-glow">{t('hero.partneringWithFalcons')}</span>
-              <div className="w-px h-8 bg-gradient-to-b from-transparent via-gray-400 to-transparent"></div>
+            <div className="flex items-center space-x-2 text-sm text-white animate-fadeInUp delay-900">
+              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t('hero.partneringWithFalcons')}</span>
+              <div className="w-px h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
             </div>
           </div>
         </div>

@@ -248,7 +248,7 @@ body {
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
 }
 
-/* Intersection observer animations */
+/* Intersection observer animations - Fixed to prevent re-triggering */
 .fade-in-up {
   opacity: 0;
   transform: translateY(50px);
@@ -258,6 +258,8 @@ body {
 .fade-in-up.visible {
   opacity: 1;
   transform: translateY(0);
+  /* Prevent re-animation */
+  animation: none;
 }
 
 .fade-in-left {
@@ -269,6 +271,8 @@ body {
 .fade-in-left.visible {
   opacity: 1;
   transform: translateX(0);
+  /* Prevent re-animation */
+  animation: none;
 }
 
 .fade-in-right {
@@ -280,6 +284,8 @@ body {
 .fade-in-right.visible {
   opacity: 1;
   transform: translateX(0);
+  /* Prevent re-animation */
+  animation: none;
 }
 
 /* Advanced geometric animations */
@@ -429,14 +435,38 @@ textarea:focus {
   opacity: 0;
   transform: translateY(60px) scale(0.96);
   filter: blur(12px);
-  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1), filter 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: none; /* Remove transition to prevent lag */
+  will-change: opacity, transform, filter;
 }
 
 .fade-in-up-obs.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
-  animation: fadeInUpObs 1.1s cubic-bezier(0.4,0,0.2,1) both;
+  /* Run animation only once */
+  animation: fadeInUpObs 1.1s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* Ensure elements stay visible after animation */
+.fade-in-up-obs.visible {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  filter: blur(0) !important;
+}
+
+/* Prevent any re-animation */
+.fade-in-up-obs.visible {
+  animation-fill-mode: forwards;
+}
+
+/* Optimize performance for animations */
+.fade-in-up-obs,
+.fade-in-up,
+.fade-in-left,
+.fade-in-right {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: opacity, transform, filter;
 }
 
 /* Delays for children */
