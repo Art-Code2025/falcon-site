@@ -99,7 +99,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
         {/* Subtitle with typing effect */}
         <div className={`overflow-hidden mb-4 ${isLoaded ? 'animate-slideInFromTop' : 'opacity-0'}`}>
-          <p className="text-white text-xs md:text-sm font-medium tracking-widest uppercase animate-fadeInUp delay-100 text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
+          <p className="text-white text-xs md:text-sm font-medium tracking-widest uppercase animate-fadeInUp delay-100 text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center typewriter">
             {t('hero.subtitle')}
           </p>
         </div>
@@ -107,7 +107,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
         {/* Main Title with enhanced effects */}
         <div className={`overflow-hidden mb-6 ${isLoaded ? 'animate-slideInFromTop delay-200' : 'opacity-0'}`}>
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] animate-fadeInUp delay-300 text-center">
-            <span className="block animate-gradient-text bg-gradient-to-r from-white via-white to-white bg-clip-text text-transparent text-glow-strong drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <span className="block animate-gradient-text bg-gradient-to-r from-white via-white to-white bg-clip-text text-transparent text-glow-strong drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-reveal">
               {t('hero.title')}
             </span>
           </h1>
@@ -115,7 +115,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
 
         {/* Description with staggered animation */}
         <div className={`overflow-hidden mb-8 ${isLoaded ? 'animate-slideInFromTop delay-400' : 'opacity-0'}`}>
-          <p className="text-white text-lg md:text-xl max-w-2xl leading-relaxed animate-fadeInUp delay-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
+          <p className="text-white text-lg md:text-xl max-w-2xl leading-relaxed animate-fadeInUp delay-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center scroll-slide-right">
             {t('hero.description')}
           </p>
         </div>
@@ -124,7 +124,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
         <div className={`overflow-hidden ${isLoaded ? 'animate-slideInFromTop delay-600' : 'opacity-0'}`}>
           <button
             onClick={() => scrollToSection('contact')}
-            className="group relative bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white px-12 py-5 rounded-full text-lg font-semibold shadow-2xl transition-all duration-500 animate-fadeInUp delay-700 hover:scale-110 hover:shadow-blue-500/25 btn-shine"
+            className="group relative bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white px-12 py-5 rounded-full text-lg font-semibold shadow-2xl transition-all duration-500 animate-fadeInUp delay-700 hover:scale-110 hover:shadow-blue-500/25 btn-shine magnetic-hover hover-3d"
             aria-label="Contact us section"
           >
             <span className="relative z-10">{t('hero.ctaButton')}</span>
@@ -136,9 +136,9 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
         </div>
 
         {/* Floating elements for visual interest */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl animate-enhanced-float" />
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl animate-enhanced-float delay-1000" />
-        <div className="absolute top-1/2 left-5 w-16 h-16 bg-green-500/10 rounded-full blur-xl animate-enhanced-float delay-2000" />
+        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl animate-enhanced-float morph-shape" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl animate-enhanced-float delay-1000 morph-shape" />
+        <div className="absolute top-1/2 left-5 w-16 h-16 bg-green-500/10 rounded-full blur-xl animate-enhanced-float delay-2000 morph-shape" />
       </div>
 
       {/* Enhanced Bottom Navigation Indicators */}
@@ -147,10 +147,10 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 text-sm text-white animate-fadeInUp delay-800">
               <div className="w-px h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
-              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t('hero.investmentCriteria')}</span>
+              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] scroll-slide-left">{t('hero.investmentCriteria')}</span>
             </div>
             <div className="flex items-center space-x-2 text-sm text-white animate-fadeInUp delay-900">
-              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t('hero.partneringWithFalcons')}</span>
+              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] scroll-slide-right">{t('hero.partneringWithFalcons')}</span>
               <div className="w-px h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
             </div>
           </div>

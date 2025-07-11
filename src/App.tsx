@@ -21,6 +21,8 @@ function App() {
   const [scrollY, setScrollY] = useState(0);
   const [heroIndex, setHeroIndex] = useState(0);
   const [hasAnimated, setHasAnimated] = useState<Record<string, boolean>>({});
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // refs for sections
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -37,22 +39,37 @@ function App() {
     document.documentElement.lang = currentLang;
   }, [i18n.language]);
 
+  // Enhanced scroll tracking with progress
   useEffect(() => {
-    const throttle = (func: () => void, limit: number) => {
-      let inThrottle: boolean;
-      return () => {
-        if (!inThrottle) {
-          func();
-          inThrottle = true;
-          setTimeout(() => (inThrottle = false), limit);
-        }
-      };
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrolled / maxScroll) * 100;
+      
+      setScrollY(scrolled);
+      setScrollProgress(progress);
     };
-    const handleScroll = throttle(() => setScrollY(window.scrollY), 100);
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Mouse tracking for interactive effects
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      setMousePosition({
+        x: (clientX - innerWidth / 2) / innerWidth,
+        y: (clientY - innerHeight / 2) / innerHeight
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Enhanced Intersection Observer with scroll-based animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -60,12 +77,17 @@ function App() {
           if (entry.isIntersecting && !hasAnimated[entry.target.id]) {
             setIsVisible(prev => ({ ...prev, [entry.target.id]: true }));
             setHasAnimated(prev => ({ ...prev, [entry.target.id]: true }));
+            
+            // Add scroll-triggered animations
+            const element = entry.target as HTMLElement;
+            element.style.setProperty('--scroll-progress', '1');
+            element.classList.add('scroll-animated');
           }
         });
       },
       { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
+        rootMargin: '0px 0px -100px 0px'
       }
     );
 
@@ -97,6 +119,35 @@ function App() {
         <title>Falcons Capital - Business Consulting & Investments</title>
         <meta name="description" content="Falcons Capital empowers industrial growth through strategic investments and business consulting services." />
       </Helmet>
+      
+      {/* Scroll Progress Indicator */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
+        <div 
+          className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      {/* Interactive Background Elements */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div 
+          className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
+          style={{
+            left: `${50 + mousePosition.x * 20}%`,
+            top: `${30 + mousePosition.y * 20}%`,
+            transform: `translate(-50%, -50%) scale(${1 + Math.abs(mousePosition.x + mousePosition.y) * 0.5})`
+          }}
+        />
+        <div 
+          className="absolute w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"
+          style={{
+            left: `${70 + mousePosition.y * 15}%`,
+            top: `${60 + mousePosition.x * 15}%`,
+            transform: `translate(-50%, -50%) scale(${1 + Math.abs(mousePosition.x - mousePosition.y) * 0.3})`
+          }}
+        />
+      </div>
+
       {/* Navigation - Transparent with Blur */}
       <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} scrollToSection={scrollToSection} />
       <Hero heroImages={heroImages} heroIndex={heroIndex} scrollToSection={scrollToSection} />
@@ -108,25 +159,25 @@ function App() {
         className={`py-12 md:py-20 bg-white relative overflow-x-hidden fade-in-up-obs${isVisible['about'] ? ' visible' : ''}`}
       >
         {/* Background decorative elements */}
-        <div className="absolute top-0 left-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-enhanced-float" />
-        <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-30 animate-enhanced-float delay-1000" />
+        <div className="absolute top-0 left-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-enhanced-float morph-shape" />
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-30 animate-enhanced-float delay-1000 morph-shape" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Enhanced Steps at the top */}
           <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-12 mb-10 md:mb-16">
-            <div className={`text-center fade-in-up-obs stagger-1 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+            <div className={`text-center fade-in-up-obs stagger-1 ${isVisible['about'] ? 'visible scroll-bounce' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
               <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.transformative')}</div>
               <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.investments')}</div>
             </div>
-            <div className={`text-center fade-in-up-obs stagger-2 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+            <div className={`text-center fade-in-up-obs stagger-2 ${isVisible['about'] ? 'visible scroll-rotate' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
               <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.strategic')}</div>
               <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.ambition')}</div>
             </div>
-            <div className={`text-center fade-in-up-obs stagger-3 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+            <div className={`text-center fade-in-up-obs stagger-3 ${isVisible['about'] ? 'visible scroll-scale' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
               <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.exceptional')}</div>
               <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.teams')}</div>
             </div>
-            <div className={`text-center fade-in-up-obs stagger-4 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+            <div className={`text-center fade-in-up-obs stagger-4 ${isVisible['about'] ? 'visible scroll-slide-left' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
               <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.impactful')}</div>
               <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.results')}</div>
             </div>
@@ -137,33 +188,33 @@ function App() {
             {/* Left: Text with enhanced effects */}
             <div className="relative">
               {/* Decorative line */}
-              <div className="absolute top-0 left-0 w-16 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8" />
+              <div className="absolute top-0 left-0 w-16 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8 morph-shape" />
               
-              <h2 className={`text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 fade-in-up-obs stagger-5 ${isVisible['about'] ? 'visible' : ''}`}> 
+              <h2 className={`text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 fade-in-up-obs stagger-5 ${isVisible['about'] ? 'visible text-reveal' : ''}`}> 
                 <span className="italic font-normal text-blue-600">{t('about.steps.transformative')}</span> {t('about.steps.investments')}
               </h2>
-              <p className={`text-gray-700 text-base md:text-lg mb-6 fade-in-up-obs stagger-6 ${isVisible['about'] ? 'visible' : ''} leading-relaxed`}>{t('about.subtitle')}</p>
-              <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-7 ${isVisible['about'] ? 'visible' : ''} leading-relaxed`}>{t('about.description')}</p>
-              <button className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg transition-all duration-300 fade-in-up-obs stagger-8 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 hover:shadow-blue-500/25 btn-shine`}>
+              <p className={`text-gray-700 text-base md:text-lg mb-6 fade-in-up-obs stagger-6 ${isVisible['about'] ? 'visible scroll-slide-right' : ''} leading-relaxed`}>{t('about.subtitle')}</p>
+              <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-7 ${isVisible['about'] ? 'visible scroll-animated' : ''} leading-relaxed`}>{t('about.description')}</p>
+              <button className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg transition-all duration-300 fade-in-up-obs stagger-8 ${isVisible['about'] ? 'visible scroll-bounce' : ''} hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover`}>
                 {t('about.ctaButton')}
                 <ArrowRight size={18} className="animate-pulse" />
               </button>
             </div>
             
             {/* Right: Enhanced Image with effects */}
-            <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 ${isVisible['about'] ? 'visible' : ''} relative`}> 
-              <div className="relative group">
+            <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 ${isVisible['about'] ? 'visible scroll-rotate' : ''} relative`}> 
+              <div className="relative group hover-3d">
                 <img 
                   src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&w=800&q=80" 
                   alt="City Skyline Business" 
-                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d" 
+                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll" 
                   style={{ minHeight: '260px', background: '#f3f4f6' }} 
                 />
                 {/* Overlay effect */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 {/* Floating elements */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 rounded-full animate-enhanced-float" />
-                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-500 rounded-full animate-enhanced-float delay-1000" />
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 rounded-full animate-enhanced-float morph-shape" />
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-500 rounded-full animate-enhanced-float delay-1000 morph-shape" />
               </div>
             </div>
           </div>
@@ -177,21 +228,21 @@ function App() {
         className={`py-12 md:py-20 bg-white fade-in-up-obs${isVisible['services'] ? ' visible' : ''} relative overflow-hidden`}
       >
         {/* Background decorative elements */}
-        <div className="absolute top-20 left-10 w-24 h-24 bg-green-100 rounded-full blur-3xl opacity-30 animate-enhanced-float" />
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-enhanced-float delay-1500" />
+        <div className="absolute top-20 left-10 w-24 h-24 bg-green-100 rounded-full blur-3xl opacity-30 animate-enhanced-float morph-shape" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-enhanced-float delay-1500 morph-shape" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['services'] ? 'visible' : ''} text-glow-strong`}>
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['services'] ? 'visible text-reveal' : ''} text-glow-strong`}>
               {t('services.title')}
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 animate-fadeInUp delay-200">{t('services.subtitle')}</p>
+            <p className={`text-lg md:text-xl text-gray-600 animate-fadeInUp delay-200 ${isVisible['services'] ? 'scroll-slide-right' : ''}`}>{t('services.subtitle')}</p>
           </div>
 
           {/* Enhanced Services Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['services'] ? ' visible' : ''} group hover:scale-105`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['services'] ? ' visible scroll-bounce' : ''} group hover:scale-105 hover-3d`}>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 morph-shape">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded transform rotate-45"></div>
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.consulting.title')}</h3>
@@ -203,8 +254,8 @@ function App() {
               </p>
             </div>
             
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['services'] ? ' visible' : ''} group hover:scale-105`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['services'] ? ' visible scroll-rotate' : ''} group hover:scale-105 hover-3d`}>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 morph-shape">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full"></div>
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.support.title')}</h3>
@@ -216,15 +267,15 @@ function App() {
               </p>
             </div>
             
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 fade-in-up-obs stagger-4${isVisible['services'] ? ' visible' : ''} group hover:scale-105`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 fade-in-up-obs stagger-4${isVisible['services'] ? ' visible scroll-scale' : ''} group hover:scale-105 hover-3d`}>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 morph-shape">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-sm transform rotate-12"></div>
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.services.title')}</h3>
               <div className="text-gray-600 mb-4 md:mb-6 text-left text-xs md:text-sm">
                 {(t('services.services.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
                   <p key={index} className="mb-2 flex items-center">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
+                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0 morph-shape"></span>
                     {item}
                   </p>
                 ))}
@@ -236,9 +287,9 @@ function App() {
           </div>
 
           {/* Enhanced Large Image Section */}
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl group hover-3d">
             <div 
-              className="h-64 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105"
+              className="h-64 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105 parallax-scroll"
               style={{
                 backgroundImage: `url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&fit=crop')`
               }}
@@ -246,16 +297,16 @@ function App() {
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent group-hover:from-gray-900/70 transition-all duration-500"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center text-white px-4">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-glow-strong">{t('services.cta.title')}</h3>
-                  <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base hover:scale-105 hover:shadow-blue-500/25 btn-shine">
+                  <h3 className={`text-2xl md:text-3xl font-bold mb-4 text-glow-strong ${isVisible['services'] ? 'text-reveal' : ''}`}>{t('services.cta.title')}</h3>
+                  <button className={`bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['services'] ? 'scroll-bounce' : ''}`}>
                     {t('services.cta.button')}
                   </button>
                 </div>
               </div>
             </div>
             {/* Floating elements */}
-            <div className="absolute top-4 right-4 w-6 h-6 bg-white/20 rounded-full animate-enhanced-float" />
-            <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/20 rounded-full animate-enhanced-float delay-1000" />
+            <div className="absolute top-4 right-4 w-6 h-6 bg-white/20 rounded-full animate-enhanced-float morph-shape" />
+            <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/20 rounded-full animate-enhanced-float delay-1000 morph-shape" />
           </div>
         </div>
       </section>
