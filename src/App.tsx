@@ -140,14 +140,14 @@ function App() {
               style={{ transitionProperty: 'opacity' }}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/70 to-gray-900/40 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/80 to-black/70 mix-blend-multiply" />
         </div>
         {/* Hero Content */}
         <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
           <p className="text-blue-200 text-xs md:text-sm font-medium mb-4 tracking-widest uppercase animate-fadeInUp">
             PEOPLE ARE THE MOST IMPORTANT INVESTMENT
           </p>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate-fadeInUp delay-300 drop-shadow-xl">
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate-fadeInUp delay-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             WE MAKE
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed animate-fadeInUp delay-500">
