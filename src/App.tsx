@@ -74,12 +74,14 @@ function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated[entry.target.id]) {
-            setIsVisible(prev => ({ ...prev, [entry.target.id]: true }));
-            setHasAnimated(prev => ({ ...prev, [entry.target.id]: true }));
+          const element = entry.target as HTMLElement;
+          const elementId = element.id;
+          
+          if (entry.isIntersecting && elementId && !hasAnimated[elementId]) {
+            setIsVisible(prev => ({ ...prev, [elementId]: true }));
+            setHasAnimated(prev => ({ ...prev, [elementId]: true }));
             
             // Add scroll-triggered animations
-            const element = entry.target as HTMLElement;
             element.style.setProperty('--scroll-progress', '1');
             element.classList.add('scroll-animated');
           }
@@ -91,11 +93,40 @@ function App() {
       }
     );
 
-    const sections = document.querySelectorAll('[id]');
+    // Observe all sections with id
+    const sections = document.querySelectorAll('section[id]');
     sections.forEach(section => observer.observe(section));
 
     return () => observer.disconnect();
   }, [hasAnimated]);
+
+  // Additional observer for inner elements with fade-in-up-obs class
+  useEffect(() => {
+    const innerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const element = entry.target as HTMLElement;
+          
+          if (entry.isIntersecting && !element.classList.contains('visible')) {
+            // Add a small delay to ensure smooth animation
+            setTimeout(() => {
+              element.classList.add('visible');
+            }, 50);
+          }
+        });
+      },
+      { 
+        threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    // Observe all elements with fade-in-up-obs class
+    const innerElements = document.querySelectorAll('.fade-in-up-obs');
+    innerElements.forEach(element => innerObserver.observe(element));
+
+    return () => innerObserver.disconnect();
+  }, []);
 
   // Hero image slider
   useEffect(() => {
@@ -165,21 +196,21 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Enhanced Steps at the top */}
           <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-12 mb-10 md:mb-16">
-            <div className={`text-center fade-in-up-obs stagger-1 ${isVisible['about'] ? 'visible scroll-bounce' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
-              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.transformative')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.investments')}</div>
+            <div className={`text-center fade-in-up-obs stagger-1 glitch-effect ${isVisible['about'] ? 'visible scroll-bounce' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1 typewriter">{t('about.steps.transformative')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow text-reveal">{t('about.steps.investments')}</div>
             </div>
             <div className={`text-center fade-in-up-obs stagger-2 ${isVisible['about'] ? 'visible scroll-rotate' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
-              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.strategic')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.ambition')}</div>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1 typewriter">{t('about.steps.strategic')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow text-reveal">{t('about.steps.ambition')}</div>
             </div>
             <div className={`text-center fade-in-up-obs stagger-3 ${isVisible['about'] ? 'visible scroll-scale' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
-              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.exceptional')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.teams')}</div>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1 typewriter">{t('about.steps.exceptional')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow text-reveal">{t('about.steps.teams')}</div>
             </div>
             <div className={`text-center fade-in-up-obs stagger-4 ${isVisible['about'] ? 'visible scroll-slide-left' : ''} hover:scale-105 transition-transform duration-300 hover-3d`}>
-              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.impactful')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.results')}</div>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1 typewriter">{t('about.steps.impactful')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow text-reveal">{t('about.steps.results')}</div>
             </div>
           </div>
           
@@ -190,24 +221,24 @@ function App() {
               {/* Decorative line */}
               <div className="absolute top-0 left-0 w-16 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8 morph-shape" />
               
-              <h2 className={`text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 fade-in-up-obs stagger-5 ${isVisible['about'] ? 'visible text-reveal' : ''}`}> 
-                <span className="italic font-normal text-blue-600">{t('about.steps.transformative')}</span> {t('about.steps.investments')}
+              <h2 className={`text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 fade-in-up-obs stagger-5 text-reveal ${isVisible['about'] ? 'visible text-reveal' : ''}`}> 
+                <span className="italic font-normal text-blue-600 typewriter">{t('about.steps.transformative')}</span> {t('about.steps.investments')}
               </h2>
-              <p className={`text-gray-700 text-base md:text-lg mb-6 fade-in-up-obs stagger-6 ${isVisible['about'] ? 'visible scroll-slide-right' : ''} leading-relaxed`}>{t('about.subtitle')}</p>
-              <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-7 ${isVisible['about'] ? 'visible scroll-animated' : ''} leading-relaxed`}>{t('about.description')}</p>
-              <button className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg transition-all duration-300 fade-in-up-obs stagger-8 ${isVisible['about'] ? 'visible scroll-bounce' : ''} hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover`}>
+              <p className={`text-gray-700 text-base md:text-lg mb-6 fade-in-up-obs stagger-6 scroll-slide-right text-reveal ${isVisible['about'] ? 'visible' : ''} leading-relaxed`}>{t('about.subtitle')}</p>
+              <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-7 scroll-animated text-reveal ${isVisible['about'] ? 'visible' : ''} leading-relaxed`}>{t('about.description')}</p>
+              <button className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg transition-all duration-300 fade-in-up-obs stagger-8 scroll-bounce hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['about'] ? 'visible' : ''}`}>
                 {t('about.ctaButton')}
                 <ArrowRight size={18} className="animate-pulse" />
               </button>
             </div>
             
             {/* Right: Enhanced Image with effects */}
-            <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 ${isVisible['about'] ? 'visible scroll-rotate' : ''} relative`}> 
+            <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 scroll-rotate relative`}> 
               <div className="relative group hover-3d">
                 <img 
                   src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&w=800&q=80" 
                   alt="City Skyline Business" 
-                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll" 
+                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll morph-shape" 
                   style={{ minHeight: '260px', background: '#f3f4f6' }} 
                 />
                 {/* Overlay effect */}
