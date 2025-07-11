@@ -1,119 +1,98 @@
 {
   "navigation": {
     "about": "About",
-    "portfolio": "Portfolio",
-    "investments": "Investments",
-    "partnering": "Partnering",
-    "news": "News",
-    "contact": "Contact",
-    "limitedPartnersLogin": "Limited Partners Login"
+    "services": "Services",
+    "team": "Team",
+    "contact": "Contact"
   },
   "hero": {
-    "subtitle": "PEOPLE ARE THE MOST IMPORTANT INVESTMENT",
-    "title": "WE MAKE",
-    "description": "We are Falcons and we empower Industrial Growth",
+    "subtitle": "ALCONS",
+    "title": "WE BUILD BUSINESS WITH YOU",
+    "description": "With over 15 years of experience, helping businesses to grow.",
     "ctaButton": "Contact us",
-    "investmentCriteria": "Investment Criteria",
-    "partneringWithFalcons": "Partnering With Falcons"
+    "trading": "Hong Kong Trading",
+    "experience": "15+ Years Experience"
   },
   "about": {
     "steps": {
-      "transformative": "Transformative",
-      "strategic": "Strategic",
-      "exceptional": "Exceptional",
-      "impactful": "Impactful",
-      "investments": "INVESTMENTS",
-      "ambition": "AMBITION",
-      "teams": "TEAMS",
-      "results": "RESULTS"
+      "established": "Established",
+      "experience": "Experience",
+      "location": "Location",
+      "services": "Services"
     },
-    "title": "Transformative Investments",
-    "subtitle": "Falcons Capital has driven meaningful change through strategic investments.",
-    "description": "Our visionary leadership, strategic partnerships, and focus on long-term value creation have fostered innovation and growth across various industries. We collaborate closely with our portfolio companies, ensuring their success and sustainability, empowering businesses to reach their full potential.",
-    "ctaButton": "Transform your business"
+    "title": "About Us",
+    "subtitle": "We are registered trading Company in Hong Kong",
+    "description": "Our company is established in 2004, we have experience over 15 years. Our Area of Business trading in Furniture, Building materials and Cosmetics. We Supply to our customers directly from Chinese suppliers In Hong Kong and main land China.",
+    "ctaButton": "Learn More"
   },
   "services": {
-    "title": "Transformative Investments",
+    "title": "Our Services",
     "subtitle": "The finest business consulting services in the area",
     "consulting": {
       "title": "CONSULTING",
-      "description": "We provide free consultation to our customers to select the ideal supplier and provide certain advice to maintain mutual benefits.",
+      "description": "We provide free consultation to our customers to select the ideal supplier and provide certain advises in order to maintain mutual benefits",
       "subtitle": "Financial advice that can save you time and money."
     },
     "support": {
       "title": "SUPPORT",
-      "description": "We support our customers in every step of orders made and confirmed and provide after-sales services to ensure customer satisfaction.",
-      "subtitle": "Comprehensive support throughout your business journey."
+      "description": "We do Support our customers In every step of orders made and confirmed and provide after sales services to ensure the satisfaction of our customers",
+      "subtitle": "Marketing experience that counts when trying to reach your customer base."
     },
     "services": {
       "title": "SERVICES",
       "items": [
-        "Search for products from actual suppliers",
-        "Provide alternative prices based on quality",
-        "Product inspection before delivery",
-        "Check all official documents",
-        "Provide certificates for special products"
+        "Search for products required from actual suppliers",
+        "Provide alternative prices based on quality and quantity",
+        "We provide products inspection before delivery",
+        "We check all official documents before sending to customers",
+        "Provide certain Certificates for special products"
       ],
-      "subtitle": "Marketing experience that counts when reaching your customer base."
+      "subtitle": "Marketing experience that counts when trying to reach your customer base."
     },
     "cta": {
-      "title": "Transform your business",
-      "button": "Learn More"
+      "title": "Contact Us",
+      "button": "Contact Us"
     }
   },
   "humanCapital": {
-    "label": "OUR APPROACH",
-    "title": "Human Capital",
-    "description": "With nearly 30 years of experience, we bring the best practices and lessons learned over 100 investments to our partnerships.",
-    "subDescription": "We start by focusing on the team. We like to know what motivates our partners and what they are passionate about both inside and outside the office.",
+    "label": "Our Expertise",
+    "title": "Trading Excellence",
+    "description": "We specialize in trading Furniture, Building materials and Cosmetics with direct supply from Chinese suppliers in Hong Kong and mainland China.",
+    "subDescription": "Our commitment to quality and customer satisfaction has made us a trusted partner for businesses worldwide.",
     "buttons": {
-      "contact": "Contact us",
-      "readMore": "Read more"
+      "services": "Our Services",
+      "readMore": "Learn More"
     }
   },
   "sectors": {
-    "label": "TARGETED SECTORS",
-    "description": "We work with management teams and our Executive Advisors to implement customized investment strategies utilizing the best resources.",
-    "distribution": {
-      "category": "Value-added",
-      "title": "Distribution"
+    "label": "Our Business Areas",
+    "description": "We specialize in trading high-quality products across multiple sectors with direct supply from Chinese manufacturers.",
+    "furniture": {
+      "category": "Trading",
+      "title": "Furniture"
     },
-    "services": {
-      "category": "Industrial",
-      "title": "Services"
+    "buildingMaterials": {
+      "category": "Trading",
+      "title": "Building Materials"
     },
-    "products": {
-      "category": "Industrial",
-      "title": "Products"
+    "cosmetics": {
+      "category": "Trading",
+      "title": "Cosmetics"
     }
   },
   "team": {
-    "title": "Testimonials",
-    "subtitle": "& Client Success Stories",
+    "title": "The Team",
+    "subtitle": "Meet our dedicated team",
     "members": {
       "zailai": {
         "name": "Zailai Shouki",
         "position": "Director",
-        "description": "Leading the company with over 15 years of experience in international trade and business development, driving strategic growth and partnerships."
+        "description": "With over 15 years of experience in business consulting and trading, Zailai leads our company with strategic vision and deep market knowledge."
       },
       "minna": {
         "name": "Minna Gou",
         "position": "Marketing Assistant",
-        "description": "Dedicated to providing excellent customer service and supporting our clients throughout their business journey with personalized attention."
-      }
-    },
-    "testimonials": {
-      "client1": {
-        "text": "FALCONS provided exceptional service and helped us find the perfect suppliers for our furniture business. Their expertise saved us time and money.",
-        "author": "Business Client"
-      },
-      "client2": {
-        "text": "Outstanding support throughout our entire order process. The quality inspection and documentation services are top-notch.",
-        "author": "Trading Partner"
-      },
-      "client3": {
-        "text": "Professional, reliable, and always delivers on promises. FALCONS has been our trusted partner for building materials for years.",
-        "author": "Construction Company"
+        "description": "Minna specializes in customer relations and marketing strategies, ensuring our clients receive the best service and support throughout their journey."
       }
     }
   },
@@ -143,7 +122,7 @@
       "contact": "Contact",
       "legal": "Legal"
     },
-    "copyright": "Copyright 2024 FALCONS. All rights reserved.",
-    "privacy": "Privacy Policy and Disclosures by FALCONS"
+    "copyright": "Copyright 2024 ALCONS. All rights reserved.",
+    "privacy": "Privacy Policy and Disclosures by ALCONS"
   }
 } 

@@ -32,18 +32,18 @@ const Footer: React.FC = () => {
               <div className="relative">
                 <img 
                   src="/logo.png" 
-                  alt="Falcons Logo" 
+                  alt="ALCONS Logo" 
                   className="h-16 w-auto md:h-20 transition-transform duration-300 group-hover:scale-110" 
                   style={{filter:'drop-shadow(0 2px 8px #0002)'}} 
                 />
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800 group-hover:text-blue-600 transition-colors duration-300">FALCONS</span>
+              <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800 group-hover:text-blue-600 transition-colors duration-300">ALCONS</span>
             </div>
             <div className="text-gray-700 text-sm md:text-base max-w-md leading-relaxed">
-              Falcons Capital Inc., including its various divisions and subsidiaries, operates as separate legal entities providing specialized consultancy services.<br/><br/>
-              These services primarily encompass identifying, analyzing, and negotiating investment opportunities across various sectors in the US and globally.<br/><br/>
-              Our follow-up activities include board memberships, financial oversight, and comprehensive reporting efforts, all aimed at ensuring the success and sustainability of our investments.
+              ALCONS is a registered trading company in Hong Kong, established in 2004 with over 15 years of experience in international trade.<br/><br/>
+              We specialize in trading Furniture, Building materials and Cosmetics with direct supply from Chinese suppliers in Hong Kong and mainland China.<br/><br/>
+              Our commitment to quality and customer satisfaction has made us a trusted partner for businesses worldwide.
             </div>
           </div>
           
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
               <div className="group">
                 <h4 className="font-semibold mb-2 text-gray-700 group-hover:text-blue-600 transition-colors duration-300">{t('footer.links.about')}</h4>
                 <ul className="space-y-1 text-gray-600 text-sm">
-                  {['Portfolio', 'Investments', 'Partnering', 'News', 'Contact'].map((item, index) => (
+                  {['About Us', 'Our Services', 'The Team', 'Contact'].map((item, index) => (
                     <li key={index}>
                       <a 
                         href="#" 
@@ -105,19 +105,19 @@ const Footer: React.FC = () => {
                 <ul className="space-y-1 text-gray-600 text-sm">
                   <li className="flex items-center gap-2">
                     <MapPin size={14} className="text-blue-600" />
-                    10 S. Wacker Dr., Ste. 3300
+                    V- Serviced Office, Rm E21 - Hua Le Building
                   </li>
                   <li className="flex items-center gap-2">
                     <MapPin size={14} className="text-blue-600" />
-                    Chicago, IL 60606
+                    Hua Le Lu, Yuexiu, Guangzhou, Guangdong, China
                   </li>
                   <li className="flex items-center gap-2">
                     <Phone size={14} className="text-blue-600" />
-                    (312) 876-7267
+                    866-20-61093893 - Minna - Falcons
                   </li>
                   <li className="flex items-center gap-2">
                     <Mail size={14} className="text-blue-600" />
-                    info@falconscapital.com
+                    falconsmgr@hotmail.com
                   </li>
                 </ul>
               </div>
@@ -125,7 +125,7 @@ const Footer: React.FC = () => {
               <div className="group">
                 <h4 className="font-semibold mb-2 text-gray-700 group-hover:text-blue-600 transition-colors duration-300">{t('footer.links.legal')}</h4>
                 <ul className="space-y-1 text-gray-600 text-sm">
-                  {['Careers', 'Privacy Policy', 'Terms of Service'].map((item, index) => (
+                  {['Privacy Policy', 'Terms of Service', 'Contact Us'].map((item, index) => (
                     <li key={index}>
                       <a 
                         href="#" 

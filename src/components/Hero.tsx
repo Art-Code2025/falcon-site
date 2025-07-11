@@ -147,10 +147,10 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 text-sm text-white animate-fadeInUp delay-800">
               <div className="w-px h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
-              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] scroll-slide-left">{t('hero.investmentCriteria')}</span>
+              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] scroll-slide-left">{t('hero.trading')}</span>
             </div>
             <div className="flex items-center space-x-2 text-sm text-white animate-fadeInUp delay-900">
-              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] scroll-slide-right">{t('hero.partneringWithFalcons')}</span>
+              <span className="font-medium text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] scroll-slide-right">{t('hero.experience')}</span>
               <div className="w-px h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
             </div>
           </div>

@@ -66,7 +66,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
                   <h1 className={`text-xl md:text-3xl font-bold tracking-wider transition-colors duration-300 ${
                     scrolled ? 'text-gray-900' : 'text-white'
                   } group-hover:text-blue-600`}>
-                    FALCONS
+                    ALCONS
                   </h1>
                 </div>
               </div>
@@ -76,11 +76,9 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
           <div className="hidden md:block">
             <div className="ml-6 md:ml-10 flex items-baseline space-x-4 md:space-x-8">
               {[
-                { key: 'home', label: t('navigation.about') },
-                { key: 'services', label: t('navigation.portfolio') },
-                { key: 'about', label: t('navigation.investments') },
-                { key: 'team', label: t('navigation.partnering') },
-                { key: 'contact', label: t('navigation.news') },
+                { key: 'about', label: t('navigation.about') },
+                { key: 'services', label: t('navigation.services') },
+                { key: 'team', label: t('navigation.team') },
                 { key: 'contact', label: t('navigation.contact') }
               ].map((item, index) => (
                 <button 
@@ -138,10 +136,9 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
               
               {/* Navigation Links */}
               {[
-                { key: 'home', label: t('navigation.about') },
-                { key: 'services', label: t('navigation.portfolio') },
-                { key: 'about', label: t('navigation.investments') },
-                { key: 'team', label: t('navigation.partnering') },
+                { key: 'about', label: t('navigation.about') },
+                { key: 'services', label: t('navigation.services') },
+                { key: 'team', label: t('navigation.team') },
                 { key: 'contact', label: t('navigation.contact') }
               ].map((item, index) => (
                 <button 
