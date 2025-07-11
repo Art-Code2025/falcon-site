@@ -7,8 +7,8 @@ import Footer from './components/Footer';
 import { Helmet } from 'react-helmet';
 
 const heroImages = [
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80', // business handshake
-  'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1920&q=80', // office building
+  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80', // modern building
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80', // corporate office
   'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80', // modern office
   'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80', // business strategy
   'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1920&q=80'  // corporate meeting
