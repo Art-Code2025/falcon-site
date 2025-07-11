@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
@@ -11,17 +11,32 @@ type HeroProps = {
 const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) => {
   const { t } = useTranslation();
 
+  // Preload images for better performance
+  useEffect(() => {
+    heroImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [heroImages]);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-gray-900 text-white overflow-hidden">
       {/* Auto Image Slider */}
       <div className="absolute inset-0 w-full h-full">
         {heroImages.map((img, idx) => (
-          <div key={img} className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${heroIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} style={{ transitionProperty: 'opacity' }}>
+          <div 
+            key={img} 
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${heroIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} 
+            style={{ 
+              transitionProperty: 'opacity',
+              willChange: 'opacity'
+            }}
+          >
             <img
               src={img}
               alt={"Business Hero Slide " + (idx + 1)}
               className="w-full h-full object-cover"
-              loading="lazy"
+              loading="eager"
               onError={e => { (e.target as HTMLImageElement).src = '/fallback.jpg'; }}
             />
             {/* Overlay Gradient ناعم فقط */}
@@ -46,7 +61,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
         </p>
         <button
           onClick={() => scrollToSection('contact')}
-          className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 animate-fadeInUp delay-400"
+          className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 animate-fadeInUp delay-400 hover:scale-105"
           aria-label="Contact us section"
         >
           {t('hero.ctaButton')}
