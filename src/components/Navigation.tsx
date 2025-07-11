@@ -66,7 +66,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
                   <h1 className={`text-xl md:text-3xl font-bold tracking-wider transition-colors duration-300 ${
                     scrolled ? 'text-gray-900' : 'text-white'
                   } group-hover:text-blue-600`}>
-                    ALCONS
+                    FALCONS
                   </h1>
                 </div>
               </div>

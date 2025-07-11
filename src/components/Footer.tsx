@@ -32,16 +32,16 @@ const Footer: React.FC = () => {
               <div className="relative">
                 <img 
                   src="/logo.png" 
-                  alt="ALCONS Logo" 
+                  alt="FALCONS Logo" 
                   className="h-16 w-auto md:h-20 transition-transform duration-300 group-hover:scale-110" 
                   style={{filter:'drop-shadow(0 2px 8px #0002)'}} 
                 />
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800 group-hover:text-blue-600 transition-colors duration-300">ALCONS</span>
+              <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800 group-hover:text-blue-600 transition-colors duration-300">FALCONS</span>
             </div>
             <div className="text-gray-700 text-sm md:text-base max-w-md leading-relaxed">
-              ALCONS is a registered trading company in Hong Kong, established in 2004 with over 15 years of experience in international trade.<br/><br/>
+              FALCONS is a registered trading company in Hong Kong, established in 2004 with over 15 years of experience in international trade.<br/><br/>
               We specialize in trading Furniture, Building materials and Cosmetics with direct supply from Chinese suppliers in Hong Kong and mainland China.<br/><br/>
               Our commitment to quality and customer satisfaction has made us a trusted partner for businesses worldwide.
             </div>
