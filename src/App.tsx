@@ -140,7 +140,7 @@ function App() {
               style={{ transitionProperty: 'opacity' }}
             />
           ))}
-          <div className="absolute inset-0 bg-gray-900/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/70 to-gray-900/40 mix-blend-multiply" />
         </div>
         {/* Hero Content */}
         <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
@@ -482,6 +482,52 @@ function App() {
               <div className="text-lg md:text-2xl font-bold text-gray-400">duo.fi</div>
               <div className="text-lg md:text-2xl font-bold text-gray-400">BRAND</div>
               <div className="text-lg md:text-2xl font-bold text-gray-400">LOGO</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Address & Map Section */}
+      <section className="relative py-12 bg-white border-t border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+          {/* Address & Contact Info */}
+          <div className="flex-1 w-full max-w-xl animate-fadeInLeft">
+            <div className="mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Hua Le Lu, Yuexiu, Guangzhou, Guangdong, China</h3>
+              <div className="text-gray-700 text-base md:text-lg mb-1">V- Serviced Office , Rm E21 - Hua Le Building</div>
+              <div className="text-gray-700 text-base md:text-lg mb-1">Mobile: +86-13710404949</div>
+            </div>
+            <div className="flex flex-col gap-2 text-gray-700 text-base md:text-lg">
+              <div className="flex items-center gap-2">
+                <Phone size={18} className="text-blue-700" />
+                <a href="tel:8662061093893" className="hover:underline text-blue-700">866-20-61093893 - Minna - Falcons</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={18} className="text-blue-700" />
+                <a href="mailto:falconsmgr@hotmail.com" className="hover:underline text-blue-700">falconsmgr@hotmail.com</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock size={18} className="text-blue-700" />
+                <span>Monday To Friday 9am to 6pm</span>
+              </div>
+              <div className="flex items-center gap-2 pl-6">
+                <span>Saturday 9am To 1pm</span>
+              </div>
+            </div>
+          </div>
+          {/* Google Map */}
+          <div className="flex-1 w-full max-w-xl animate-fadeInRight">
+            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+              <iframe
+                title="Falcons Capital Location"
+                src="https://www.google.com/maps?q=Hua+Le+Lu,+Yuexiu,+Guangzhou,+Guangdong,+China&output=embed"
+                width="100%"
+                height="280"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
         </div>
