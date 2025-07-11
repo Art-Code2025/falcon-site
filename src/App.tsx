@@ -240,7 +240,7 @@ function App() {
             <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 scroll-rotate relative`}> 
               <div className="relative group hover-3d w-full max-w-xs sm:max-w-sm md:max-w-md">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80" 
                   alt="About Us" 
                   className="rounded-3xl shadow-2xl w-full h-auto object-contain border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll morph-shape" 
                   style={{ 
@@ -458,7 +458,7 @@ function App() {
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-400">
               <div className="aspect-square w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" 
                   alt="Cosmetics" 
                   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
                 />

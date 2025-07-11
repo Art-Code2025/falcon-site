@@ -32,7 +32,6 @@ const Footer: React.FC = () => {
               <div className="relative">
                 <img 
                   src="/logo.png" 
-                  alt="FALCONS Logo" 
                   className="h-16 w-auto md:h-20 transition-transform duration-300 group-hover:scale-110" 
                   style={{filter:'drop-shadow(0 2px 8px #0002)'}} 
                 />
