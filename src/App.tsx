@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X, ArrowRight, ChevronLeft, ChevronRight, Star, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import Navigation from './components/Navigation';
+import Hero from './components/Hero';
+import Footer from './components/Footer';
+import { Helmet } from 'react-helmet';
 
 const heroImages = [
   'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&w=1920&q=80', // handshake
@@ -16,7 +20,17 @@ function App() {
   const [heroIndex, setHeroIndex] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const throttle = (func: () => void, limit: number) => {
+      let inThrottle: boolean;
+      return () => {
+        if (!inThrottle) {
+          func();
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    };
+    const handleScroll = throttle(() => setScrollY(window.scrollY), 100);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -47,135 +61,23 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-900">
+      <Helmet>
+        <title>Falcons Capital - Business Consulting & Investments</title>
+        <meta name="description" content="Falcons Capital empowers industrial growth through strategic investments and business consulting services." />
+      </Helmet>
       {/* Navigation - Transparent with Blur */}
-      <nav className="fixed top-0 w-full bg-transparent backdrop-blur-md z-50 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 md:h-20">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="flex items-center">
-                  {/* 3D Geometric Logo */}
-                  <div className="relative w-8 h-8 md:w-10 md:h-10 mr-2 md:mr-3">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-sm shadow-lg"></div>
-                    <div className="absolute top-0.5 left-0.5 md:top-1 md:left-1 w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-gray-300 to-gray-500 transform rotate-45 rounded-sm shadow-inner"></div>
-                  </div>
-                  <div>
-                    <h1 className="text-lg md:text-2xl font-bold text-white tracking-wider">FALCONS</h1>
-                    <p className="text-xs text-gray-400 tracking-widest">CAPITAL</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="hidden md:block">
-              <div className="ml-6 md:ml-10 flex items-baseline space-x-4 md:space-x-8">
-                <button onClick={() => scrollToSection('home')} className="text-gray-300 hover:text-white transition-all duration-300 text-xs md:text-sm font-medium">About</button>
-                <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-white transition-all duration-300 text-xs md:text-sm font-medium">Portfolio</button>
-                <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-white transition-all duration-300 text-xs md:text-sm font-medium">Investments</button>
-                <button onClick={() => scrollToSection('team')} className="text-gray-300 hover:text-white transition-all duration-300 text-xs md:text-sm font-medium">Partnering</button>
-                <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-white transition-all duration-300 text-xs md:text-sm font-medium">News</button>
-                <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-white transition-all duration-300 text-xs md:text-sm font-medium">Contact</button>
-              </div>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-3 md:space-x-4">
-              <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                <div className="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full"></div>
-              </div>
-              <button className="bg-white/10 backdrop-blur-md text-white px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
-                Limited Partners Login
-              </button>
-            </div>
-            
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900/95 backdrop-blur-md border-t border-gray-800">
-              <button onClick={() => scrollToSection('home')} className="block w-full text-left px-3 py-3 text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">About</button>
-              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-3 py-3 text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">Portfolio</button>
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left px-3 py-3 text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">Investments</button>
-              <button onClick={() => scrollToSection('team')} className="block w-full text-left px-3 py-3 text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">Partnering</button>
-              <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-3 py-3 text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">Contact</button>
-              <div className="border-t border-gray-700 mt-2 pt-2">
-                <button className="block w-full text-left px-3 py-3 text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium">
-                  Limited Partners Login
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* Hero Section - Business/Consulting Slider */}
-      <section id="home" className="relative min-h-screen flex items-center bg-gray-900 text-white overflow-hidden">
-        {/* Auto Image Slider */}
-        <div className="absolute inset-0 w-full h-full">
-          {heroImages.map((img, idx) => (
-            <img
-              key={img}
-              src={img}
-              alt="Business Hero"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${heroIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-              style={{ transitionProperty: 'opacity' }}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/80 to-black/70 mix-blend-multiply" />
-        </div>
-        {/* Hero Content */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
-          <p className="text-blue-200 text-xs md:text-sm font-medium mb-4 tracking-widest uppercase animate-fadeInUp">
-            PEOPLE ARE THE MOST IMPORTANT INVESTMENT
-          </p>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate-fadeInUp delay-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-            WE MAKE
-          </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed animate-fadeInUp delay-500">
-            We are Falcons Capital and we empower Industrial Growth
-          </p>
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 animate-fadeInUp delay-1000"
-          >
-            Contact us
-          </button>
-        </div>
-        {/* Bottom Navigation Indicators - Hidden on mobile */}
-        <div className="absolute bottom-8 left-0 right-0 hidden md:block z-30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-2 text-sm text-gray-200">
-                <div className="w-px h-8 bg-gray-400"></div>
-                <span>Investment Criteria</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-200">
-                <span>Partnering With Falcons</span>
-                <div className="w-px h-8 bg-gray-400"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} scrollToSection={scrollToSection} />
+      <Hero heroImages={heroImages} heroIndex={heroIndex} scrollToSection={scrollToSection} />
 
       {/* About/Transformative Investments Section */}
       <section id="about" className="py-12 md:py-20 bg-white relative overflow-x-hidden">
@@ -527,6 +429,7 @@ function App() {
                 allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin"
               ></iframe>
             </div>
           </div>
@@ -534,84 +437,7 @@ function App() {
       </section>
 
       {/* Newsletter & Footer Section */}
-      <section className="relative pt-16 pb-8 md:pt-24 md:pb-12 bg-gradient-to-b from-gray-100 via-gray-200 to-gray-400 overflow-x-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-200/80 via-gray-300/60 to-gray-400/80"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-12 md:mb-20">
-            {/* Left: Logo & Info */}
-            <div className="flex flex-col gap-8 animate-fadeInLeft">
-              <div className="flex items-center gap-4 mb-2">
-                <img src="https://svgshare.com/i/14bA.svg" alt="Falcons Capital Logo" className="h-12 w-auto" style={{filter:'drop-shadow(0 2px 8px #0002)'}} />
-                <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800">FALCONS</span>
-              </div>
-              <div className="text-gray-700 text-sm md:text-base max-w-md">
-                Falcons Capital Inc., including its various divisions and subsidiaries, operates as separate legal entities providing specialized consultancy services.<br/><br/>
-                These services primarily encompass identifying, analyzing, and negotiating investment opportunities across various sectors in the US and globally.<br/><br/>
-                Our follow-up activities include board memberships, financial oversight, and comprehensive reporting efforts, all aimed at ensuring the success and sustainability of our investments.
-              </div>
-            </div>
-            {/* Right: Newsletter & Links */}
-            <div className="flex flex-col gap-8 animate-fadeInRight delay-300">
-              <div>
-                <h3 className="text-lg font-semibold mb-3 tracking-wider uppercase text-gray-700">SIGN UP TO OUR NEWSLETTER:</h3>
-                <form className="flex items-center bg-white/70 backdrop-blur-strong rounded-full p-2 shadow-lg max-w-xl">
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 px-4 py-3 focus:outline-none text-lg italic"
-                  />
-                  <button type="submit" className="w-12 h-12 bg-blue-700 hover:bg-blue-800 rounded-full flex items-center justify-center transition-all duration-300">
-                    <ArrowRight size={24} className="text-white" />
-                  </button>
-                </form>
-                <div className="flex items-center mt-4">
-                  <input type="checkbox" className="mr-3" />
-                  <span className="text-sm text-gray-500">I have read and accept the Terms & Privacy</span>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-4">
-                <div>
-                  <h4 className="font-semibold mb-2 text-gray-700">About</h4>
-                  <ul className="space-y-1 text-gray-600 text-sm">
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">Portfolio</a></li>
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">Investments</a></li>
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">Partnering</a></li>
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">News</a></li>
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">Contact</a></li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2 text-gray-700">Contact</h4>
-                  <ul className="space-y-1 text-gray-600 text-sm">
-                    <li>10 S. Wacker Dr., Ste. 3300</li>
-                    <li>Chicago, IL 60606</li>
-                    <li>(312) 876-7267</li>
-                    <li>info@falconscapital.com</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2 text-gray-700">Legal</h4>
-                  <ul className="space-y-1 text-gray-600 text-sm">
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">Careers</a></li>
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" className="hover:text-blue-700 transition-colors">Terms of Service</a></li>
-                  </ul>
-                  <div className="mt-4">
-                    <a href="#" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-700 hover:bg-blue-700 transition-colors">
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 text-white"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8a6 6 0 01-12 0 6 6 0 0112 0zm2 8v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" /></svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Copyright */}
-          <div className="border-t border-gray-300 pt-8 mt-8 text-center text-gray-600 text-sm">
-            Copyright 2024 FALCONS Capital. All rights reserved. |
-            <span className="ml-2">Privacy Policy and Disclosures by <span className="text-blue-700">FALCONS Capital</span></span>
-          </div>
-        </div>
-      </section>
+      <Footer />
 
       {/* Contact Section */}
       <section id="contact" className="py-12 md:py-20 bg-gray-900 text-white relative">
@@ -662,12 +488,13 @@ function App() {
             </div>
           </div>
           
-          <div className="border-t border-gray-800 pt-6 md:pt-8 mt-8 md:mt-12 text-center">
+          {/* حذف الفوتر المكرر هنا */}
+          {/* <div className="border-t border-gray-800 pt-6 md:pt-8 mt-8 md:mt-12 text-center">
             <p className="text-gray-400 text-sm md:text-base">
               Copyright 2024 FALCONS Capital. All rights reserved. | 
               <span className="ml-2">Privacy Policy and Disclosures by <span className="text-blue-400">FALCONS Capital</span></span>
             </p>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
