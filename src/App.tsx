@@ -238,16 +238,15 @@ function App() {
             
             {/* Right: Enhanced Image with effects */}
             <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 scroll-rotate relative`}> 
-              <div className="relative group hover-3d">
+              <div className="relative group hover-3d w-full max-w-xs sm:max-w-sm md:max-w-md">
                 <img 
                   src="/1.png" 
                   alt="About Us" 
-                  className="rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll morph-shape" 
+                  className="rounded-3xl shadow-2xl w-full h-auto object-contain border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll morph-shape" 
                   style={{ 
-                    minHeight: '200px',
-                    maxHeight: '300px',
-                    background: '#f3f4f6',
-                    objectPosition: 'center'
+                    minHeight: '250px',
+                    maxHeight: '400px',
+                    background: '#f3f4f6'
                   }} 
                 />
                 {/* Overlay effect */}
@@ -322,10 +321,12 @@ function App() {
           {/* Enhanced Large Image Section */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl group hover-3d">
             <div 
-              className="h-48 sm:h-64 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105 parallax-scroll"
+              className="h-64 sm:h-80 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105 parallax-scroll"
               style={{
                 backgroundImage: `url('/2.png')`,
-                backgroundPosition: 'center'
+                backgroundPosition: 'center',
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat'
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent group-hover:from-gray-900/70 transition-all duration-500"></div>
@@ -385,20 +386,21 @@ function App() {
               </div>
             </div>
             {/* Right: Image with overlay */}
-            <div className="relative flex justify-center md:justify-end animate-fadeInRight delay-300">
-              <img
-                src="/2.png"
-                alt="Business Meeting"
-                className="rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-lg object-cover border border-gray-100"
-                style={{ 
-                  minHeight: '200px',
-                  maxHeight: '300px',
-                  background: '#f3f4f6',
-                  objectPosition: 'center'
-                }}
-              />
-              {/* Glass overlay for effect */}
-              <div className="absolute inset-0 rounded-3xl bg-white/30 backdrop-blur-strong pointer-events-none" style={{mixBlendMode:'lighten'}}></div>
+            <div className="relative flex justify-center md:justify-end animate-fadeInRight delay-300 w-full">
+              <div className="w-full max-w-xs sm:max-w-sm md:max-w-lg">
+                <img
+                  src="/2.png"
+                  alt="Business Meeting"
+                  className="rounded-3xl shadow-2xl w-full h-auto object-contain border border-gray-100"
+                  style={{ 
+                    minHeight: '250px',
+                    maxHeight: '400px',
+                    background: '#f3f4f6'
+                  }}
+                />
+                {/* Glass overlay for effect */}
+                <div className="absolute inset-0 rounded-3xl bg-white/30 backdrop-blur-strong pointer-events-none" style={{mixBlendMode:'lighten'}}></div>
+              </div>
             </div>
           </div>
         </div>
@@ -424,12 +426,13 @@ function App() {
           <div className="grid md:grid-cols-3 gap-4 md:gap-8">
             {/* Furniture */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp">
-              <img 
-                src="/4.png" 
-                alt="Furniture" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" 
-                style={{ objectPosition: 'center' }}
-              />
+              <div className="aspect-square w-full">
+                <img 
+                  src="/4.png" 
+                  alt="Furniture" 
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                 <h4 className="text-sm md:text-lg font-light text-gray-300 mb-1">{t('sectors.furniture.category')}</h4>
@@ -438,12 +441,13 @@ function App() {
             </div>
             {/* Building Materials */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-200">
-              <img 
-                src="/5.png" 
-                alt="Building Materials" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" 
-                style={{ objectPosition: 'center' }}
-              />
+              <div className="aspect-square w-full">
+                <img 
+                  src="/5.png" 
+                  alt="Building Materials" 
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                 <h4 className="text-sm md:text-lg font-light text-gray-300 mb-1">{t('sectors.buildingMaterials.category')}</h4>
@@ -452,12 +456,13 @@ function App() {
             </div>
             {/* Cosmetics */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-400">
-              <img 
-                src="/1.png" 
-                alt="Cosmetics" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" 
-                style={{ objectPosition: 'center' }}
-              />
+              <div className="aspect-square w-full">
+                <img 
+                  src="/1.png" 
+                  alt="Cosmetics" 
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                 <h4 className="text-sm md:text-lg font-light text-gray-300 mb-1">{t('sectors.cosmetics.category')}</h4>

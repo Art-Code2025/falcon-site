@@ -1036,6 +1036,15 @@ textarea:focus {
   img {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .object-contain {
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    height: auto;
   }
   
   .object-cover {
@@ -1054,11 +1063,26 @@ textarea:focus {
       image-rendering: -webkit-optimize-contrast;
     }
   }
+  
+  /* Ensure full image display on mobile */
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Hero images full display */
+  .hero-image {
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 100vh;
+  }
 }
 
 /* Hero image specific optimizations */
 .hero-image {
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -1072,5 +1096,11 @@ textarea:focus {
 @media (max-width: 640px) {
   .aspect-ratio-mobile {
     aspect-ratio: 4/3;
+  }
+  
+  /* Force full image display on small screens */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
   }
 }
