@@ -15,11 +15,11 @@ const LanguageSwitcher: React.FC = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 transition-all duration-300 text-xs md:text-sm font-medium"
+      className="flex items-center gap-2 px-3 py-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 text-xs md:text-sm font-medium hover:scale-105 shadow-lg hover:shadow-xl"
       aria-label={`Switch to ${i18n.language === 'en' ? 'Arabic' : 'English'}`}
     >
-      <Globe size={16} />
-      <span>{i18n.language === 'en' ? 'العربية' : 'English'}</span>
+      <Globe size={16} className="animate-pulse" />
+      <span className="font-semibold">{i18n.language === 'en' ? 'العربية' : 'English'}</span>
     </button>
   );
 };

@@ -99,14 +99,14 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
         {/* Subtitle with typing effect */}
         <div className={`overflow-hidden mb-4 ${isLoaded ? 'animate-slideInFromTop' : 'opacity-0'}`}>
-          <p className="text-white text-xs md:text-sm font-medium tracking-widest uppercase animate-fadeInUp delay-100 text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          <p className="text-white text-xs md:text-sm font-medium tracking-widest uppercase animate-fadeInUp delay-100 text-glow drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
             {t('hero.subtitle')}
           </p>
         </div>
 
         {/* Main Title with enhanced effects */}
         <div className={`overflow-hidden mb-6 ${isLoaded ? 'animate-slideInFromTop delay-200' : 'opacity-0'}`}>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] animate-fadeInUp delay-300">
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] animate-fadeInUp delay-300 text-center">
             <span className="block animate-gradient-text bg-gradient-to-r from-white via-white to-white bg-clip-text text-transparent text-glow-strong drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               {t('hero.title')}
             </span>
@@ -115,7 +115,7 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
 
         {/* Description with staggered animation */}
         <div className={`overflow-hidden mb-8 ${isLoaded ? 'animate-slideInFromTop delay-400' : 'opacity-0'}`}>
-          <p className="text-white text-lg md:text-xl max-w-2xl leading-relaxed animate-fadeInUp delay-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          <p className="text-white text-lg md:text-xl max-w-2xl leading-relaxed animate-fadeInUp delay-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
             {t('hero.description')}
           </p>
         </div>

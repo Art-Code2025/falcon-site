@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -12,6 +12,7 @@ type NavigationProps = {
 const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scrollToSection }) => {
   const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // Handle scroll effect
   useEffect(() => {
@@ -23,6 +24,23 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Handle click outside to close menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen, setIsMenuOpen]);
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
@@ -99,31 +117,45 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
         </div>
       </div>
       
-      {/* Enhanced Mobile Menu */}
+      {/* Enhanced Mobile Menu with Language Switcher Always Visible */}
       {isMenuOpen && (
-        <div className="md:hidden animate-slideInFromTop">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-xl">
-            {[
-              { key: 'home', label: t('navigation.about') },
-              { key: 'services', label: t('navigation.portfolio') },
-              { key: 'about', label: t('navigation.investments') },
-              { key: 'team', label: t('navigation.partnering') },
-              { key: 'contact', label: t('navigation.contact') }
-            ].map((item, index) => (
-              <button 
-                key={item.key}
-                onClick={() => scrollToSection(item.key)} 
-                className="block w-full text-left px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 text-sm font-medium rounded-lg"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {item.label}
-              </button>
-            ))}
-            <div className="border-t border-gray-200 mt-2 pt-2">
-              <LanguageSwitcher />
+        <>
+          {/* Backdrop overlay for click outside */}
+          <div 
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          
+          <div className="md:hidden animate-slideInFromTop z-50 relative" ref={menuRef}>
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-xl">
+              {/* Language Switcher at the top */}
+              <div className="border-b border-gray-200 pb-3 mb-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-700">Language / اللغة</span>
+                  <LanguageSwitcher />
+                </div>
+              </div>
+              
+              {/* Navigation Links */}
+              {[
+                { key: 'home', label: t('navigation.about') },
+                { key: 'services', label: t('navigation.portfolio') },
+                { key: 'about', label: t('navigation.investments') },
+                { key: 'team', label: t('navigation.partnering') },
+                { key: 'contact', label: t('navigation.contact') }
+              ].map((item, index) => (
+                <button 
+                  key={item.key}
+                  onClick={() => scrollToSection(item.key)} 
+                  className="block w-full text-left px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 text-sm font-medium rounded-lg"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );

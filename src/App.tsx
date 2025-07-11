@@ -15,7 +15,7 @@ const heroImages = [
 ];
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [scrollY, setScrollY] = useState(0);
@@ -29,6 +29,13 @@ function App() {
   const sectorsRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+
+  // Set document direction based on language
+  useEffect(() => {
+    const currentLang = i18n.language;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = currentLang;
+  }, [i18n.language]);
 
   useEffect(() => {
     const throttle = (func: () => void, limit: number) => {
@@ -85,7 +92,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className={`min-h-screen bg-gray-900 ${i18n.language === 'ar' ? 'rtl' : 'ltr'}`}>
       <Helmet>
         <title>Falcons Capital - Business Consulting & Investments</title>
         <meta name="description" content="Falcons Capital empowers industrial growth through strategic investments and business consulting services." />
