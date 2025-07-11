@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 type HeroProps = {
   heroImages: string[];
@@ -15,32 +16,37 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
       {/* Auto Image Slider */}
       <div className="absolute inset-0 w-full h-full">
         {heroImages.map((img, idx) => (
-          <img
-            key={img}
-            src={img}
-            alt={"Business Hero Slide " + (idx + 1)}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${heroIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-            style={{ transitionProperty: 'opacity' }}
-            loading="lazy"
-            onError={e => { (e.target as HTMLImageElement).src = '/fallback.jpg'; }}
-          />
+          <div key={img} className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${heroIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} style={{ transitionProperty: 'opacity' }}>
+            <img
+              src={img}
+              alt={"Business Hero Slide " + (idx + 1)}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              onError={e => { (e.target as HTMLImageElement).src = '/fallback.jpg'; }}
+            />
+            {/* Overlay Gradient ناعم فقط */}
+            {heroIndex === idx && (
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-70" />
+              </div>
+            )}
+          </div>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/80 to-black/70 mix-blend-multiply" />
       </div>
       {/* Hero Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
-        <p className="text-blue-200 text-xs md:text-sm font-medium mb-4 tracking-widest uppercase animate-fadeInUp">
+        <p className="text-blue-200 text-xs md:text-sm font-medium mb-4 tracking-widest uppercase animate-fadeInUp delay-100">
           {t('hero.subtitle')}
         </p>
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate-fadeInUp delay-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] animate-fadeInUp delay-200">
           {t('hero.title')}
         </h1>
-        <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed animate-fadeInUp delay-500">
+        <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed animate-fadeInUp delay-300">
           {t('hero.description')}
         </p>
         <button
           onClick={() => scrollToSection('contact')}
-          className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 animate-fadeInUp delay-1000"
+          className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 animate-fadeInUp delay-400"
           aria-label="Contact us section"
         >
           {t('hero.ctaButton')}

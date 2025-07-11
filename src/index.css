@@ -8,6 +8,7 @@
 /* RTL Support */
 [dir="rtl"] {
   direction: rtl;
+  text-align: right;
 }
 
 [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
@@ -18,8 +19,50 @@
   --tw-space-x-reverse: 1;
 }
 
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-10 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-16 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-20 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
 [dir="rtl"] body {
   font-family: 'Cairo', sans-serif;
+}
+
+/* LTR Support for English */
+[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+[dir="ltr"] body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Custom Animations */
@@ -353,3 +396,44 @@ textarea:focus {
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
+
+@keyframes fadeInUpObs {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+    filter: blur(12px);
+  }
+  60% {
+    opacity: 0.7;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.fade-in-up-obs {
+  opacity: 0;
+  transform: translateY(60px) scale(0.96);
+  filter: blur(12px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1), filter 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.fade-in-up-obs.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  animation: fadeInUpObs 1.1s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* Delays for children */
+.fade-in-up-obs.stagger-1 { animation-delay: 0.12s; }
+.fade-in-up-obs.stagger-2 { animation-delay: 0.24s; }
+.fade-in-up-obs.stagger-3 { animation-delay: 0.36s; }
+.fade-in-up-obs.stagger-4 { animation-delay: 0.48s; }
+.fade-in-up-obs.stagger-5 { animation-delay: 0.6s; }
+.fade-in-up-obs.stagger-6 { animation-delay: 0.72s; }
+.fade-in-up-obs.stagger-7 { animation-delay: 0.84s; }
+.fade-in-up-obs.stagger-8 { animation-delay: 0.96s; }

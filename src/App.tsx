@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Menu, X, ArrowRight, ChevronLeft, ChevronRight, Star, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
 
 const heroImages = [
   'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&w=1920&q=80', // handshake
@@ -14,10 +16,19 @@ const heroImages = [
 ];
 
 function App() {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [scrollY, setScrollY] = useState(0);
   const [heroIndex, setHeroIndex] = useState(0);
+
+  // refs for sections
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const humanRef = useRef<HTMLDivElement>(null);
+  const sectorsRef = useRef<HTMLDivElement>(null);
+  const teamRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const throttle = (func: () => void, limit: number) => {
@@ -80,42 +91,46 @@ function App() {
       <Hero heroImages={heroImages} heroIndex={heroIndex} scrollToSection={scrollToSection} />
 
       {/* About/Transformative Investments Section */}
-      <section id="about" className="py-12 md:py-20 bg-white relative overflow-x-hidden">
+      <section
+        id="about"
+        ref={aboutRef}
+        className={`py-12 md:py-20 bg-white relative overflow-x-hidden fade-in-up-obs${isVisible['about'] ? ' visible' : ''}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Steps at the top */}
           <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-12 mb-10 md:mb-16">
             <div className="text-center">
-              <div className="text-xs md:text-sm text-gray-400 italic">Transformative</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">INVESTMENTS</div>
+              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.transformative')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.investments')}</div>
             </div>
             <div className="text-center">
-              <div className="text-xs md:text-sm text-gray-400 italic">Strategic</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">AMBITION</div>
+              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.strategic')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.ambition')}</div>
             </div>
             <div className="text-center">
-              <div className="text-xs md:text-sm text-gray-400 italic">Exceptional</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">TEAMS</div>
+              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.exceptional')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.teams')}</div>
             </div>
             <div className="text-center">
-              <div className="text-xs md:text-sm text-gray-400 italic">Impactful</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">RESULTS</div>
+              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.impactful')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.results')}</div>
             </div>
           </div>
           {/* Main content */}
           <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
             {/* Left: Text */}
             <div className="animate-fadeInUp">
-              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6">
-                <span className="italic font-normal">Transformative</span> Investments
+              <h2 className={`text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 fade-in-up-obs stagger-1 ${isVisible['about'] ? 'visible' : ''}`}>
+                <span className="italic font-normal">{t('about.steps.transformative')}</span> {t('about.steps.investments')}
               </h2>
-              <p className="text-gray-700 text-base md:text-lg mb-6">
-                Falcons Capital has driven meaningful change through strategic investments.
+              <p className={`text-gray-700 text-base md:text-lg mb-6 fade-in-up-obs stagger-2 ${isVisible['about'] ? 'visible' : ''}`}>
+                {t('about.subtitle')}
               </p>
-              <p className="text-gray-500 text-sm md:text-base mb-8">
-                Our visionary leadership, strategic partnerships, and focus on long-term value creation have fostered innovation and growth across various industries. We collaborate closely with our portfolio companies, ensuring their success and sustainability, empowering businesses to reach their full potential.
+              <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-3 ${isVisible['about'] ? 'visible' : ''}`}>
+                {t('about.description')}
               </p>
-              <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300">
-                Transform your business
+              <button className={`inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300 fade-in-up-obs stagger-4 ${isVisible['about'] ? 'visible' : ''}`}>
+                {t('about.ctaButton')}
                 <ArrowRight size={18} />
               </button>
             </div>
@@ -133,57 +148,59 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-12 md:py-20 bg-white">
+      <section
+        id="services"
+        ref={servicesRef}
+        className={`py-12 md:py-20 bg-white fade-in-up-obs${isVisible['services'] ? ' visible' : ''}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              Transformative Investments
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['services'] ? 'visible' : ''}`}>
+              {t('services.title')}
             </h2>
-            <p className="text-lg md:text-xl text-gray-600">The finest business consulting services in the area</p>
+            <p className="text-lg md:text-xl text-gray-600">{t('services.subtitle')}</p>
           </div>
 
           {/* Services Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['services'] ? ' visible' : ''}`}>
               <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded transform rotate-45"></div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">CONSULTING</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{t('services.consulting.title')}</h3>
               <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
-                We provide free consultation to our customers to select the ideal supplier and provide certain advice to maintain mutual benefits.
+                {t('services.consulting.description')}
               </p>
               <p className="text-xs md:text-sm text-gray-500">
-                Financial advice that can save you time and money.
+                {t('services.consulting.subtitle')}
               </p>
             </div>
             
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['services'] ? ' visible' : ''}`}>
               <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full"></div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">SUPPORT</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{t('services.support.title')}</h3>
               <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
-                We support our customers in every step of orders made and confirmed and provide after-sales services to ensure customer satisfaction.
+                {t('services.support.description')}
               </p>
               <p className="text-xs md:text-sm text-gray-500">
-                Comprehensive support throughout your business journey.
+                {t('services.support.subtitle')}
               </p>
             </div>
             
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 fade-in-up-obs stagger-4${isVisible['services'] ? ' visible' : ''}`}>
               <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-sm transform rotate-12"></div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">SERVICES</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{t('services.services.title')}</h3>
               <div className="text-gray-600 mb-4 md:mb-6 text-left text-xs md:text-sm">
-                <p className="mb-2">• Search for products from actual suppliers</p>
-                <p className="mb-2">• Provide alternative prices based on quality</p>
-                <p className="mb-2">• Product inspection before delivery</p>
-                <p className="mb-2">• Check all official documents</p>
-                <p>• Provide certificates for special products</p>
+                {(t('services.services.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
+                  <p key={index} className="mb-2">• {item}</p>
+                ))}
               </div>
               <p className="text-xs md:text-sm text-gray-500">
-                Marketing experience that counts when reaching your customer base.
+                {t('services.services.subtitle')}
               </p>
             </div>
           </div>
@@ -199,9 +216,9 @@ function App() {
               <div className="absolute inset-0 bg-gray-900/60"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center text-white px-4">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4">Transform your business</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{t('services.cta.title')}</h3>
                   <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base">
-                    Learn More
+                    {t('services.cta.button')}
                   </button>
                 </div>
               </div>
@@ -211,30 +228,34 @@ function App() {
       </section>
 
       {/* Human Capital / Our Approach Section */}
-      <section className="relative py-12 md:py-20 bg-gradient-to-b from-white to-gray-100 overflow-x-hidden">
+      <section
+        id="human"
+        ref={humanRef}
+        className={`relative py-12 md:py-20 bg-gradient-to-b from-white to-gray-100 overflow-x-hidden fade-in-up-obs${isVisible['human'] ? ' visible' : ''}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
             {/* Left: Glassmorphism Card */}
             <div className="relative z-10 animate-fadeInLeft">
               <div className="backdrop-blur-strong bg-white/60 border border-gray-200 rounded-3xl shadow-2xl p-8 md:p-12">
                 <div className="mb-6">
-                  <span className="block text-xs md:text-sm text-blue-700 font-semibold tracking-widest mb-2">OUR APPROACH</span>
+                  <span className="block text-xs md:text-sm text-blue-700 font-semibold tracking-widest mb-2">{t('humanCapital.label')}</span>
                   <h3 className="text-2xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
-                    Human Capital
+                    {t('humanCapital.title')}
                   </h3>
                   <p className="text-gray-700 text-base md:text-lg mb-4">
-                    With nearly <span className="font-bold text-blue-700">30 years</span> of experience, we bring the best practices and lessons learned over <span className="font-bold text-blue-700">100 investments</span> to our partnerships.
+                    {t('humanCapital.description')}
                   </p>
                   <p className="text-gray-500 text-sm md:text-base mb-6">
-                    We start by focusing on the team. We like to know what motivates our partners and what they are passionate about both inside and outside the office.
+                    {t('humanCapital.subDescription')}
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300">
-                      Contact us
+                      {t('humanCapital.buttons.contact')}
                       <ArrowRight size={18} />
                     </button>
                     <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/80 hover:bg-white text-blue-700 font-semibold border border-blue-700 shadow transition-all duration-300">
-                      Read more
+                      {t('humanCapital.buttons.readMore')}
                     </button>
                   </div>
                 </div>
@@ -256,15 +277,19 @@ function App() {
       </section>
 
       {/* Targeted Sectors Section */}
-      <section className="relative py-12 md:py-20 bg-gray-900 text-white overflow-x-hidden">
+      <section
+        id="sectors"
+        ref={sectorsRef}
+        className={`relative py-12 md:py-20 bg-gray-900 text-white overflow-x-hidden fade-in-up-obs${isVisible['sectors'] ? ' visible' : ''}`}
+      >
         {/* Background overlay */}
         <div className="absolute inset-0 bg-cover bg-center opacity-40" style={{backgroundImage: `url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&w=1920&q=80')`}}></div>
         <div className="absolute inset-0 bg-gray-900/80"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-10 md:mb-16">
-            <h3 className="text-sm font-semibold mb-2 tracking-wider uppercase text-gray-300">TARGETED SECTORS</h3>
+            <h3 className="text-sm font-semibold mb-2 tracking-wider uppercase text-gray-300">{t('sectors.label')}</h3>
             <p className="text-gray-200 max-w-2xl text-sm md:text-base">
-              We work with management teams and our Executive Advisors to implement customized investment strategies utilizing the best resources.
+              {t('sectors.description')}
             </p>
           </div>
           {/* Sectors grid */}
@@ -274,8 +299,8 @@ function App() {
               <img src="https://images.pexels.com/photos/256219/pexels-photo-256219.jpeg?auto=compress&w=800&q=80" alt="Distribution" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">Value-added</h4>
-                <h3 className="text-2xl md:text-3xl font-bold">Distribution</h3>
+                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.distribution.category')}</h4>
+                <h3 className="text-2xl md:text-3xl font-bold">{t('sectors.distribution.title')}</h3>
               </div>
             </div>
             {/* Services */}
@@ -283,8 +308,8 @@ function App() {
               <img src="https://images.pexels.com/photos/256510/pexels-photo-256510.jpeg?auto=compress&w=800&q=80" alt="Services" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">Industrial</h4>
-                <h3 className="text-2xl md:text-3xl font-bold">Services</h3>
+                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.services.category')}</h4>
+                <h3 className="text-2xl md:text-3xl font-bold">{t('sectors.services.title')}</h3>
               </div>
             </div>
             {/* Products */}
@@ -292,8 +317,8 @@ function App() {
               <img src="https://images.pexels.com/photos/209251/pexels-photo-209251.jpeg?auto=compress&w=800&q=80" alt="Products" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">Industrial</h4>
-                <h3 className="text-2xl md:text-3xl font-bold">Products</h3>
+                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.products.category')}</h4>
+                <h3 className="text-2xl md:text-3xl font-bold">{t('sectors.products.title')}</h3>
               </div>
             </div>
           </div>
@@ -301,39 +326,43 @@ function App() {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-12 md:py-20 bg-gray-100">
+      <section
+        id="team"
+        ref={teamRef}
+        className={`py-12 md:py-20 bg-gray-100 fade-in-up-obs${isVisible['team'] ? ' visible' : ''}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 ${isVisible.team ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              Testimonials
-              <span className="block text-xl md:text-2xl font-normal text-gray-600">& Client Success Stories</span>
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['team'] ? 'visible' : ''}`}>
+              {t('team.title')}
+              <span className="block text-xl md:text-2xl font-normal text-gray-600">{t('team.subtitle')}</span>
             </h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto mb-12 md:mb-16">
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 ${isVisible.team ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['team'] ? ' visible' : ''}`}>
               <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <div className="w-8 h-8 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center">
                   <div className="w-4 h-4 md:w-6 md:h-6 bg-blue-500 rounded-full"></div>
                 </div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Zailai Shouki</h3>
-              <p className="text-blue-600 font-semibold mb-3 md:mb-4 text-sm md:text-base">Director</p>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">{t('team.members.zailai.name')}</h3>
+              <p className="text-blue-600 font-semibold mb-3 md:mb-4 text-sm md:text-base">{t('team.members.zailai.position')}</p>
               <p className="text-gray-600 text-sm md:text-base">
-                Leading the company with over 15 years of experience in international trade and business development, driving strategic growth and partnerships.
+                {t('team.members.zailai.description')}
               </p>
             </div>
             
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 ${isVisible.team ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['team'] ? ' visible' : ''}`}>
               <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <div className="w-8 h-8 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center">
                   <div className="w-4 h-4 md:w-6 md:h-6 bg-green-500 rounded-full"></div>
                 </div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Minna Gou</h3>
-              <p className="text-blue-600 font-semibold mb-3 md:mb-4 text-sm md:text-base">Marketing Assistant</p>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">{t('team.members.minna.name')}</h3>
+              <p className="text-blue-600 font-semibold mb-3 md:mb-4 text-sm md:text-base">{t('team.members.minna.position')}</p>
               <p className="text-gray-600 text-sm md:text-base">
-                Dedicated to providing excellent customer service and supporting our clients throughout their business journey with personalized attention.
+                {t('team.members.minna.description')}
               </p>
             </div>
           </div>
@@ -347,9 +376,9 @@ function App() {
                 ))}
               </div>
               <p className="text-gray-600 mb-3 md:mb-4 text-sm md:text-base">
-                "FALCONS provided exceptional service and helped us find the perfect suppliers for our furniture business. Their expertise saved us time and money."
+                "{t('team.testimonials.client1.text')}"
               </p>
-              <div className="font-semibold text-gray-900 text-sm md:text-base">- Business Client</div>
+              <div className="font-semibold text-gray-900 text-sm md:text-base">- {t('team.testimonials.client1.author')}</div>
             </div>
             
             <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
@@ -359,9 +388,9 @@ function App() {
                 ))}
               </div>
               <p className="text-gray-600 mb-3 md:mb-4 text-sm md:text-base">
-                "Outstanding support throughout our entire order process. The quality inspection and documentation services are top-notch."
+                "{t('team.testimonials.client2.text')}"
               </p>
-              <div className="font-semibold text-gray-900 text-sm md:text-base">- Trading Partner</div>
+              <div className="font-semibold text-gray-900 text-sm md:text-base">- {t('team.testimonials.client2.author')}</div>
             </div>
             
             <div className="bg-gray-50 p-4 md:p-6 rounded-lg sm:col-span-2 lg:col-span-1">
@@ -371,9 +400,9 @@ function App() {
                 ))}
               </div>
               <p className="text-gray-600 mb-3 md:mb-4 text-sm md:text-base">
-                "Professional, reliable, and always delivers on promises. FALCONS has been our trusted partner for building materials for years."
+                "{t('team.testimonials.client3.text')}"
               </p>
-              <div className="font-semibold text-gray-900 text-sm md:text-base">- Construction Company</div>
+              <div className="font-semibold text-gray-900 text-sm md:text-base">- {t('team.testimonials.client3.author')}</div>
             </div>
           </div>
 
@@ -390,30 +419,34 @@ function App() {
       </section>
 
       {/* Company Address & Map Section */}
-      <section className="relative py-12 bg-white border-t border-b border-gray-200">
+      <section
+        id="contact"
+        ref={contactRef}
+        className={`relative py-12 bg-white border-t border-b border-gray-200 fade-in-up-obs${isVisible['contact'] ? ' visible' : ''}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
           {/* Address & Contact Info */}
           <div className="flex-1 w-full max-w-xl animate-fadeInLeft">
             <div className="mb-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Hua Le Lu, Yuexiu, Guangzhou, Guangdong, China</h3>
-              <div className="text-gray-700 text-base md:text-lg mb-1">V- Serviced Office , Rm E21 - Hua Le Building</div>
-              <div className="text-gray-700 text-base md:text-lg mb-1">Mobile: +86-13710404949</div>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{t('contact.address.title')}</h3>
+              <div className="text-gray-700 text-base md:text-lg mb-1">{t('contact.address.office')}</div>
+              <div className="text-gray-700 text-base md:text-lg mb-1">{t('contact.address.mobile')}</div>
             </div>
             <div className="flex flex-col gap-2 text-gray-700 text-base md:text-lg">
               <div className="flex items-center gap-2">
                 <Phone size={18} className="text-blue-700" />
-                <a href="tel:8662061093893" className="hover:underline text-blue-700">866-20-61093893 - Minna - Falcons</a>
+                <a href="tel:8662061093893" className="hover:underline text-blue-700">{t('contact.info.phone')}</a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={18} className="text-blue-700" />
-                <a href="mailto:falconsmgr@hotmail.com" className="hover:underline text-blue-700">falconsmgr@hotmail.com</a>
+                <a href="mailto:falconsmgr@hotmail.com" className="hover:underline text-blue-700">{t('contact.info.email')}</a>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={18} className="text-blue-700" />
-                <span>Monday To Friday 9am to 6pm</span>
+                <span>{t('contact.info.hours.weekdays')}</span>
               </div>
               <div className="flex items-center gap-2 pl-6">
-                <span>Saturday 9am To 1pm</span>
+                <span>{t('contact.info.hours.saturday')}</span>
               </div>
             </div>
           </div>
@@ -435,8 +468,9 @@ function App() {
           </div>
         </div>
       </section>
-
-     
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

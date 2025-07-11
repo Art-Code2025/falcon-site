@@ -19,14 +19,14 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="flex items-center">
-                {/* 3D Geometric Logo */}
-                <div className="relative w-8 h-8 md:w-10 md:h-10 mr-2 md:mr-3">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-sm shadow-lg"></div>
-                  <div className="absolute top-0.5 left-0.5 md:top-1 md:left-1 w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-gray-300 to-gray-500 transform rotate-45 rounded-sm shadow-inner"></div>
-                </div>
+                {/* Custom Logo */}
+                <img 
+                  src="/logo.png" 
+                  alt="Falcons Logo" 
+                  className="w-12 h-12 md:w-16 md:h-16 mr-3 md:mr-4"
+                />
                 <div>
-                  <h1 className="text-lg md:text-2xl font-bold text-white tracking-wider">FALCONS</h1>
-                  <p className="text-xs text-gray-400 tracking-widest">CAPITAL</p>
+                  <h1 className="text-xl md:text-3xl font-bold text-white tracking-wider">FALCONS</h1>
                 </div>
               </div>
             </div>
@@ -48,9 +48,6 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
             <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-600 rounded-full flex items-center justify-center">
               <div className="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full"></div>
             </div>
-            <button className="bg-white/10 backdrop-blur-md text-white px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
-              {t('navigation.limitedPartnersLogin')}
-            </button>
           </div>
           
           <div className="md:hidden">
@@ -75,11 +72,6 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
             <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-3 py-3 text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium">{t('navigation.contact')}</button>
             <div className="border-t border-gray-700 mt-2 pt-2">
               <LanguageSwitcher />
-            </div>
-            <div className="border-t border-gray-700 mt-2 pt-2">
-              <button className="block w-full text-left px-3 py-3 text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium">
-                {t('navigation.limitedPartnersLogin')}
-              </button>
             </div>
           </div>
         </div>
