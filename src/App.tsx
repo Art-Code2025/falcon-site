@@ -436,67 +436,7 @@ function App() {
         </div>
       </section>
 
-      {/* Newsletter & Footer Section */}
-      <Footer />
-
-      {/* Contact Section */}
-      <section id="contact" className="py-12 md:py-20 bg-gray-900 text-white relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {/* Contact Info Columns */}
-            <div>
-              <h4 className="font-semibold mb-4 md:mb-6 text-base md:text-lg">About</h4>
-              <ul className="space-y-2 md:space-y-3 text-gray-400 text-sm md:text-base">
-                <li><a href="#" className="hover:text-white transition-colors">Portfolio</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Investments</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Partnering</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">News</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4 md:mb-6 text-base md:text-lg">Contact</h4>
-              <div className="space-y-3 md:space-y-4 text-gray-400 text-sm md:text-base">
-                <div>
-                  <p className="font-medium text-white">V- Serviced Office, Rm E21 - Hua Le Building</p>
-                  <p>Hua Le Lu, Yuexiu, Guangzhou, Guangdong, China</p>
-                </div>
-                <div>
-                  <p>Mobile: +86-13710404949</p>
-                  <p>Office: 866-20-61093893</p>
-                </div>
-                <div>
-                  <p>falconsmgr@hotmail.com</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="sm:col-span-2 lg:col-span-1">
-              <h4 className="font-semibold mb-4 md:mb-6 text-base md:text-lg">Legal</h4>
-              <ul className="space-y-2 md:space-y-3 text-gray-400 text-sm md:text-base">
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              </ul>
-              
-              <div className="mt-6 md:mt-8">
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-white/10 rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 md:w-5 md:h-5 bg-white rounded"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* حذف الفوتر المكرر هنا */}
-          {/* <div className="border-t border-gray-800 pt-6 md:pt-8 mt-8 md:mt-12 text-center">
-            <p className="text-gray-400 text-sm md:text-base">
-              Copyright 2024 FALCONS Capital. All rights reserved. | 
-              <span className="ml-2">Privacy Policy and Disclosures by <span className="text-blue-400">FALCONS Capital</span></span>
-            </p>
-          </div> */}
-        </div>
-      </section>
+     
     </div>
   );
 }

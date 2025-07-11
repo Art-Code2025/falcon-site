@@ -1,0 +1,147 @@
+{
+  "navigation": {
+    "about": "About",
+    "portfolio": "Portfolio",
+    "investments": "Investments",
+    "partnering": "Partnering",
+    "news": "News",
+    "contact": "Contact",
+    "limitedPartnersLogin": "Limited Partners Login"
+  },
+  "hero": {
+    "subtitle": "PEOPLE ARE THE MOST IMPORTANT INVESTMENT",
+    "title": "WE MAKE",
+    "description": "We are Falcons Capital and we empower Industrial Growth",
+    "ctaButton": "Contact us"
+  },
+  "about": {
+    "steps": {
+      "transformative": "Transformative",
+      "strategic": "Strategic",
+      "exceptional": "Exceptional",
+      "impactful": "Impactful",
+      "investments": "INVESTMENTS",
+      "ambition": "AMBITION",
+      "teams": "TEAMS",
+      "results": "RESULTS"
+    },
+    "title": "Transformative Investments",
+    "subtitle": "Falcons Capital has driven meaningful change through strategic investments.",
+    "description": "Our visionary leadership, strategic partnerships, and focus on long-term value creation have fostered innovation and growth across various industries. We collaborate closely with our portfolio companies, ensuring their success and sustainability, empowering businesses to reach their full potential.",
+    "ctaButton": "Transform your business"
+  },
+  "services": {
+    "title": "Transformative Investments",
+    "subtitle": "The finest business consulting services in the area",
+    "consulting": {
+      "title": "CONSULTING",
+      "description": "We provide free consultation to our customers to select the ideal supplier and provide certain advice to maintain mutual benefits.",
+      "subtitle": "Financial advice that can save you time and money."
+    },
+    "support": {
+      "title": "SUPPORT",
+      "description": "We support our customers in every step of orders made and confirmed and provide after-sales services to ensure customer satisfaction.",
+      "subtitle": "Comprehensive support throughout your business journey."
+    },
+    "services": {
+      "title": "SERVICES",
+      "items": [
+        "Search for products from actual suppliers",
+        "Provide alternative prices based on quality",
+        "Product inspection before delivery",
+        "Check all official documents",
+        "Provide certificates for special products"
+      ],
+      "subtitle": "Marketing experience that counts when reaching your customer base."
+    },
+    "cta": {
+      "title": "Transform your business",
+      "button": "Learn More"
+    }
+  },
+  "humanCapital": {
+    "label": "OUR APPROACH",
+    "title": "Human Capital",
+    "description": "With nearly 30 years of experience, we bring the best practices and lessons learned over 100 investments to our partnerships.",
+    "subDescription": "We start by focusing on the team. We like to know what motivates our partners and what they are passionate about both inside and outside the office.",
+    "buttons": {
+      "contact": "Contact us",
+      "readMore": "Read more"
+    }
+  },
+  "sectors": {
+    "label": "TARGETED SECTORS",
+    "description": "We work with management teams and our Executive Advisors to implement customized investment strategies utilizing the best resources.",
+    "distribution": {
+      "category": "Value-added",
+      "title": "Distribution"
+    },
+    "services": {
+      "category": "Industrial",
+      "title": "Services"
+    },
+    "products": {
+      "category": "Industrial",
+      "title": "Products"
+    }
+  },
+  "team": {
+    "title": "Testimonials",
+    "subtitle": "& Client Success Stories",
+    "members": {
+      "zailai": {
+        "name": "Zailai Shouki",
+        "position": "Director",
+        "description": "Leading the company with over 15 years of experience in international trade and business development, driving strategic growth and partnerships."
+      },
+      "minna": {
+        "name": "Minna Gou",
+        "position": "Marketing Assistant",
+        "description": "Dedicated to providing excellent customer service and supporting our clients throughout their business journey with personalized attention."
+      }
+    },
+    "testimonials": {
+      "client1": {
+        "text": "FALCONS provided exceptional service and helped us find the perfect suppliers for our furniture business. Their expertise saved us time and money.",
+        "author": "Business Client"
+      },
+      "client2": {
+        "text": "Outstanding support throughout our entire order process. The quality inspection and documentation services are top-notch.",
+        "author": "Trading Partner"
+      },
+      "client3": {
+        "text": "Professional, reliable, and always delivers on promises. FALCONS has been our trusted partner for building materials for years.",
+        "author": "Construction Company"
+      }
+    }
+  },
+  "contact": {
+    "address": {
+      "title": "Hua Le Lu, Yuexiu, Guangzhou, Guangdong, China",
+      "office": "V- Serviced Office , Rm E21 - Hua Le Building",
+      "mobile": "Mobile: +86-13710404949"
+    },
+    "info": {
+      "phone": "866-20-61093893 - Minna - Falcons",
+      "email": "falconsmgr@hotmail.com",
+      "hours": {
+        "weekdays": "Monday To Friday 9am to 6pm",
+        "saturday": "Saturday 9am To 1pm"
+      }
+    }
+  },
+  "footer": {
+    "newsletter": {
+      "title": "SIGN UP TO OUR NEWSLETTER:",
+      "placeholder": "your@email.com",
+      "terms": "I have read and accept the Terms & Privacy"
+    },
+    "links": {
+      "about": "About",
+      "contact": "Contact",
+      "legal": "Legal"
+    },
+    "copyright": "Copyright 2024 FALCONS Capital. All rights reserved.",
+    "privacy": "Privacy Policy and Disclosures by FALCONS Capital"
+  }
+} 

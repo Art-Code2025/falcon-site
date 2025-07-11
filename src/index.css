@@ -1,37 +1,87 @@
+/* Arabic Font Support */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .animate-fadeInUp {
-    animation: fadeInUp 1.2s ease-out forwards;
-  }
-  
-  .animate-fadeInUp.delay-300 {
-    animation-delay: 0.3s;
-    opacity: 0;
-  }
-  
-  .animate-fadeInUp.delay-500 {
-    animation-delay: 0.5s;
-    opacity: 0;
-  }
-  
-  .animate-fadeInUp.delay-1000 {
-    animation-delay: 1s;
-    opacity: 0;
-  }
+/* RTL Support */
+[dir="rtl"] {
+  direction: rtl;
 }
 
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] body {
+  font-family: 'Cairo', sans-serif;
+}
+
+/* Custom Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fadeInLeft {
+  animation: fadeInLeft 0.6s ease-out;
+}
+
+.animate-fadeInRight {
+  animation: fadeInRight 0.6s ease-out;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
 }
 
 /* Floating animation for 3D elements */
@@ -56,13 +106,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #374151;
+  background: #1f2937;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -209,10 +259,10 @@ body {
   background-clip: text;
 }
 
-/* Enhanced backdrop blur */
+/* Backdrop Blur Support */
 .backdrop-blur-strong {
-  backdrop-filter: blur(20px) saturate(180%);
-  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 /* Loading animation */
