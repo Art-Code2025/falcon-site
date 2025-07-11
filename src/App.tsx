@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, ChevronLeft, ChevronRight, Star, Phone, Mail, MapPin, Clock } from 'lucide-react';
 
+const heroImages = [
+  'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&w=1920&q=80', // handshake
+  'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&w=1920&q=80', // business meeting
+  'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&w=1920&q=80', // team discussion
+  'https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg?auto=compress&w=1920&q=80', // financial charts
+  'https://images.pexels.com/photos/3183171/pexels-photo-3183171.jpeg?auto=compress&w=1920&q=80', // consulting
+];
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [scrollY, setScrollY] = useState(0);
+  const [heroIndex, setHeroIndex] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -28,6 +37,14 @@ function App() {
     sections.forEach(section => observer.observe(section));
 
     return () => observer.disconnect();
+  }, []);
+
+  // Hero image slider
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -110,174 +127,104 @@ function App() {
         )}
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Business/Consulting Slider */}
       <section id="home" className="relative min-h-screen flex items-center bg-gray-900 text-white overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')`,
-            transform: `translateY(${scrollY * 0.5}px)`
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-gray-900/90"></div>
-        
-        {/* 3D Geometric Elements - Hidden on mobile */}
-        <div className="absolute top-1/4 right-1/4 w-32 h-32 opacity-30 animate-float hidden md:block">
-          <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-lg shadow-2xl"></div>
+        {/* Auto Image Slider */}
+        <div className="absolute inset-0 w-full h-full">
+          {heroImages.map((img, idx) => (
+            <img
+              key={img}
+              src={img}
+              alt="Business Hero"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${heroIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+              style={{ transitionProperty: 'opacity' }}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gray-900/60" />
         </div>
-        <div className="absolute bottom-1/3 right-1/3 w-24 h-24 opacity-20 animate-float hidden md:block" style={{animationDelay: '2s'}}>
-          <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 transform rotate-12 rounded shadow-2xl"></div>
+        {/* Hero Content */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
+          <p className="text-blue-200 text-xs md:text-sm font-medium mb-4 tracking-widest uppercase animate-fadeInUp">
+            PEOPLE ARE THE MOST IMPORTANT INVESTMENT
+          </p>
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate-fadeInUp delay-300 drop-shadow-xl">
+            WE MAKE
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed animate-fadeInUp delay-500">
+            We are Falcons Capital and we empower Industrial Growth
+          </p>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 animate-fadeInUp delay-1000"
+          >
+            Contact us
+          </button>
         </div>
-        
-        {/* Large 3D Triangle - Hidden on mobile */}
-        <div className="absolute right-20 top-1/2 transform -translate-y-1/2 opacity-40 hidden lg:block">
-          <div className="relative">
-            <div className="w-0 h-0 border-l-[100px] border-r-[100px] border-b-[150px] border-l-transparent border-r-transparent border-b-gradient-to-r from-blue-400 to-blue-600 shadow-2xl"></div>
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[80px] border-r-[80px] border-b-[120px] border-l-transparent border-r-transparent border-b-gray-300 shadow-inner"></div>
-          </div>
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-4xl">
-            <p className="text-blue-400 text-sm font-medium mb-6 tracking-widest uppercase animate-fadeInUp text-center md:text-left">
-              PEOPLE ARE THE MOST IMPORTANT INVESTMENT
-            </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-8 leading-tight animate-fadeInUp delay-300 text-center md:text-left">
-              <span className="block">WE BUILD</span>
-              <span className="block">BUSINESS</span>
-              <span className="block text-blue-400">WITH YOU</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed animate-fadeInUp delay-500 text-center md:text-left">
-              We are FALCONS and we empower Industrial Growth
-            </p>
-            <div className="text-center md:text-left">
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 md:px-10 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center animate-fadeInUp delay-1000 shadow-2xl"
-              >
-                Contact us
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Bottom Navigation Indicators - Hidden on mobile */}
-        <div className="absolute bottom-8 left-0 right-0 hidden md:block">
+        <div className="absolute bottom-8 left-0 right-0 hidden md:block z-30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <div className="w-px h-8 bg-gray-600"></div>
+              <div className="flex items-center space-x-2 text-sm text-gray-200">
+                <div className="w-px h-8 bg-gray-400"></div>
                 <span>Investment Criteria</span>
               </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <span>Partnering With FALCONS</span>
-                <div className="w-px h-8 bg-gray-600"></div>
+              <div className="flex items-center space-x-2 text-sm text-gray-200">
+                <span>Partnering With Falcons</span>
+                <div className="w-px h-8 bg-gray-400"></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-12 md:py-20 bg-gray-100 relative">
-        {/* Diagonal White Section */}
-        <div className="absolute top-0 left-0 w-full h-16 md:h-32 bg-white transform -skew-y-2 origin-top-left"></div>
-        
+      {/* About/Transformative Investments Section */}
+      <section id="about" className="py-12 md:py-20 bg-white relative overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
-            <div className={`transition-all duration-1000 ${isVisible.about ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-              <div className="mb-6 md:mb-8">
-                <p className="text-blue-600 text-sm font-medium mb-4 tracking-wider uppercase">About Us</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Driving transformation through
-                  <span className="block text-blue-600">Strategic Investment</span>
-                  <span className="block">for nearly</span>
-                  <span className="block italic text-gray-600">15 Years</span>
-                </h2>
-              </div>
-              
-              <div className="mb-6 md:mb-8">
-                <div className="flex items-center mb-6">
-                  <div className="text-4xl md:text-6xl font-bold text-blue-600 mr-4 md:mr-6">15</div>
-                  <div>
-                    <p className="text-base md:text-lg font-semibold text-gray-900">Years</p>
-                    <p className="text-gray-600">of Excellence</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-                  We are a registered trading company in Hong Kong. Our company was established in 2004, and we have over 15 years of experience in international trade. Our areas of business include trading in Furniture, Building materials, and Cosmetics.
-                </p>
-                <p className="text-gray-600 leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
-                  We supply to our customers directly from Chinese suppliers in Hong Kong and mainland China, ensuring quality and competitive pricing for all our partners.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                <button className="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-200 border-b border-blue-600">
-                  Read more
-                </button>
-                <div className="hidden sm:block w-px h-6 bg-gray-400"></div>
-                <button className="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-200">
-                  News & Insights
-                </button>
-              </div>
+          {/* Steps at the top */}
+          <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-12 mb-10 md:mb-16">
+            <div className="text-center">
+              <div className="text-xs md:text-sm text-gray-400 italic">Transformative</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">INVESTMENTS</div>
             </div>
-            
-            <div className={`transition-all duration-1000 delay-300 ${isVisible.about ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-              <div className="relative">
-                {/* Large 3D Triangle - Hidden on mobile */}
-                <div className="absolute -top-16 -right-16 opacity-20 hidden md:block">
-                  <div className="w-0 h-0 border-l-[120px] border-r-[120px] border-b-[180px] border-l-transparent border-r-transparent border-b-gray-300"></div>
-                </div>
-                
-                <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl relative z-10">
-                  <div className="mb-6">
-                    <h3 className="text-blue-600 text-sm font-medium mb-2 tracking-wider uppercase">OUR APPROACH</h3>
-                  </div>
-                  
-                  <div className="mb-6 md:mb-8">
-                    <p className="text-gray-600 mb-4 text-sm md:text-base">
-                      With nearly <strong>15 years</strong> of experience, we bring the best practices and lessons learned over <strong>100 investments</strong> to our partnerships.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
-                    <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg">
-                      <div className="text-xl md:text-2xl font-bold text-blue-600 mb-1">2004</div>
-                      <div className="text-xs text-gray-600 uppercase tracking-wide">ESTABLISHED</div>
-                    </div>
-                    <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg">
-                      <div className="text-xl md:text-2xl font-bold text-blue-600 mb-1">3</div>
-                      <div className="text-xs text-gray-600 uppercase tracking-wide">BUSINESS AREAS</div>
-                    </div>
-                    <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg">
-                      <div className="text-xl md:text-2xl font-bold text-blue-600 mb-1">HK</div>
-                      <div className="text-xs text-gray-600 uppercase tracking-wide">REGISTERED</div>
-                    </div>
-                    <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg">
-                      <div className="text-xl md:text-2xl font-bold text-blue-600 mb-1">CN</div>
-                      <div className="text-xs text-gray-600 uppercase tracking-wide">SUPPLIERS</div>
-                    </div>
-                  </div>
-                  
-                  <h4 className="text-base md:text-lg font-bold text-gray-900 mb-4">Our Business Areas</h4>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                      <span className="text-gray-700 text-sm md:text-base">Furniture Trading</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                      <span className="text-gray-700 text-sm md:text-base">Building Materials</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                      <span className="text-gray-700 text-sm md:text-base">Cosmetics</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="text-center">
+              <div className="text-xs md:text-sm text-gray-400 italic">Strategic</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">AMBITION</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xs md:text-sm text-gray-400 italic">Exceptional</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">TEAMS</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xs md:text-sm text-gray-400 italic">Impactful</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">RESULTS</div>
+            </div>
+          </div>
+          {/* Main content */}
+          <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
+            {/* Left: Text */}
+            <div className="animate-fadeInUp">
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6">
+                <span className="italic font-normal">Transformative</span> Investments
+              </h2>
+              <p className="text-gray-700 text-base md:text-lg mb-6">
+                Falcons Capital has driven meaningful change through strategic investments.
+              </p>
+              <p className="text-gray-500 text-sm md:text-base mb-8">
+                Our visionary leadership, strategic partnerships, and focus on long-term value creation have fostered innovation and growth across various industries. We collaborate closely with our portfolio companies, ensuring their success and sustainability, empowering businesses to reach their full potential.
+              </p>
+              <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300">
+                Transform your business
+                <ArrowRight size={18} />
+              </button>
+            </div>
+            {/* Right: Image */}
+            <div className="flex justify-center md:justify-end animate-fadeInUp delay-300">
+              <img
+                src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&w=800&q=80"
+                alt="City Skyline Business"
+                className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100"
+                style={{ minHeight: '260px', background: '#f3f4f6' }}
+              />
             </div>
           </div>
         </div>
@@ -361,107 +308,91 @@ function App() {
         </div>
       </section>
 
-      {/* Business Meeting Section */}
-      <section className="py-12 md:py-20 bg-gray-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-blue-900/20 to-gray-900"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div>
-              <div className="mb-6 md:mb-8">
-                <h3 className="text-blue-400 text-sm font-medium mb-2 tracking-wider uppercase">OUR APPROACH</h3>
-                <p className="text-gray-300 mb-4 md:mb-6 text-sm md:text-base">
-                  With nearly <strong className="text-white">15 years</strong> of experience, we bring the best practices and lessons learned over <strong className="text-white">100 investments</strong> to our partnerships.
-                </p>
-              </div>
-              
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 mb-6 md:mb-8 text-sm md:text-base">
-                Contact us
-              </button>
-
-              {/* Navigation Arrows */}
-              <div className="flex space-x-3 md:space-x-4">
-                <button className="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-                  <ChevronLeft size={16} className="md:w-5 md:h-5" />
-                </button>
-                <button className="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-                  <ChevronRight size={16} className="md:w-5 md:h-5" />
-                </button>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <div 
-                className="h-60 md:h-80 bg-cover bg-center rounded-2xl relative overflow-hidden"
-                style={{
-                  backgroundImage: `url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop')`
-                }}
-              >
-                <div className="absolute inset-0 bg-gray-900/40"></div>
-                <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 right-4 md:right-6">
-                  <div className="bg-gray-900/80 backdrop-blur-md rounded-lg p-4 md:p-6">
-                    <h4 className="text-xl md:text-2xl font-bold text-white mb-2">Human Capital</h4>
-                    <p className="text-gray-300 text-xs md:text-sm mb-3 md:mb-4">
-                      We start by focusing on the team. We like to know what motivates our partners and what they are passionate about both inside and outside the office.
-                    </p>
-                    <button className="text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-200 border-b border-blue-400 text-sm md:text-base">
+      {/* Human Capital / Our Approach Section */}
+      <section className="relative py-12 md:py-20 bg-gradient-to-b from-white to-gray-100 overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
+            {/* Left: Glassmorphism Card */}
+            <div className="relative z-10 animate-fadeInLeft">
+              <div className="backdrop-blur-strong bg-white/60 border border-gray-200 rounded-3xl shadow-2xl p-8 md:p-12">
+                <div className="mb-6">
+                  <span className="block text-xs md:text-sm text-blue-700 font-semibold tracking-widest mb-2">OUR APPROACH</span>
+                  <h3 className="text-2xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
+                    Human Capital
+                  </h3>
+                  <p className="text-gray-700 text-base md:text-lg mb-4">
+                    With nearly <span className="font-bold text-blue-700">30 years</span> of experience, we bring the best practices and lessons learned over <span className="font-bold text-blue-700">100 investments</span> to our partnerships.
+                  </p>
+                  <p className="text-gray-500 text-sm md:text-base mb-6">
+                    We start by focusing on the team. We like to know what motivates our partners and what they are passionate about both inside and outside the office.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300">
+                      Contact us
+                      <ArrowRight size={18} />
+                    </button>
+                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/80 hover:bg-white text-blue-700 font-semibold border border-blue-700 shadow transition-all duration-300">
                       Read more
                     </button>
                   </div>
                 </div>
               </div>
             </div>
+            {/* Right: Image with overlay */}
+            <div className="relative flex justify-center md:justify-end animate-fadeInRight delay-300">
+              <img
+                src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&w=900&q=80"
+                alt="Business Meeting"
+                className="rounded-3xl shadow-2xl w-full max-w-lg object-cover border border-gray-100"
+                style={{ minHeight: '260px', background: '#f3f4f6' }}
+              />
+              {/* Glass overlay for effect */}
+              <div className="absolute inset-0 rounded-3xl bg-white/30 backdrop-blur-strong pointer-events-none" style={{mixBlendMode:'lighten'}}></div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Targeted Sectors Section */}
-      <section className="py-12 md:py-20 bg-gray-800 text-white relative overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage: `url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')`
-          }}
-        ></div>
+      <section className="relative py-12 md:py-20 bg-gray-900 text-white overflow-x-hidden">
+        {/* Background overlay */}
+        <div className="absolute inset-0 bg-cover bg-center opacity-40" style={{backgroundImage: `url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&w=1920&q=80')`}}></div>
         <div className="absolute inset-0 bg-gray-900/80"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="mb-12 md:mb-16">
-            <h3 className="text-sm font-medium mb-3 md:mb-4 tracking-wider uppercase text-gray-400">TARGETED SECTORS</h3>
-            <p className="text-gray-300 max-w-2xl text-sm md:text-base">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="mb-10 md:mb-16">
+            <h3 className="text-sm font-semibold mb-2 tracking-wider uppercase text-gray-300">TARGETED SECTORS</h3>
+            <p className="text-gray-200 max-w-2xl text-sm md:text-base">
               We work with management teams and our Executive Advisors to implement customized investment strategies utilizing the best resources.
             </p>
           </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            <div className="text-center">
-              <div className="mb-4 md:mb-6">
-                <h4 className="text-base md:text-lg font-light text-gray-400 mb-2">Value-added</h4>
-                <h3 className="text-3xl md:text-4xl font-bold">Distribution</h3>
+          {/* Sectors grid */}
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            {/* Distribution */}
+            <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp">
+              <img src="https://images.pexels.com/photos/256219/pexels-photo-256219.jpeg?auto=compress&w=800&q=80" alt="Distribution" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">Value-added</h4>
+                <h3 className="text-2xl md:text-3xl font-bold">Distribution</h3>
               </div>
-              <button className="text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-200 text-sm md:text-base">
-                Read more
-              </button>
             </div>
-            
-            <div className="text-center">
-              <div className="mb-4 md:mb-6">
-                <h4 className="text-base md:text-lg font-light text-gray-400 mb-2">Industrial</h4>
-                <h3 className="text-3xl md:text-4xl font-bold">Services</h3>
+            {/* Services */}
+            <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-200">
+              <img src="https://images.pexels.com/photos/256510/pexels-photo-256510.jpeg?auto=compress&w=800&q=80" alt="Services" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">Industrial</h4>
+                <h3 className="text-2xl md:text-3xl font-bold">Services</h3>
               </div>
-              <button className="text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-200 text-sm md:text-base">
-                Read more
-              </button>
             </div>
-            
-            <div className="text-center sm:col-span-2 lg:col-span-1">
-              <div className="mb-4 md:mb-6">
-                <h4 className="text-base md:text-lg font-light text-gray-400 mb-2">Industrial</h4>
-                <h3 className="text-3xl md:text-4xl font-bold">Products</h3>
+            {/* Products */}
+            <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-400">
+              <img src="https://images.pexels.com/photos/209251/pexels-photo-209251.jpeg?auto=compress&w=800&q=80" alt="Products" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">Industrial</h4>
+                <h3 className="text-2xl md:text-3xl font-bold">Products</h3>
               </div>
-              <button className="text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-200 text-sm md:text-base">
-                Read more
-              </button>
             </div>
           </div>
         </div>
@@ -556,60 +487,82 @@ function App() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="py-12 md:py-20 bg-gray-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900"></div>
-        
-        {/* Large 3D Geometric Elements - Hidden on mobile */}
-        <div className="absolute top-0 left-0 w-64 h-64 opacity-10 hidden md:block">
-          <div className="w-0 h-0 border-l-[200px] border-r-[200px] border-b-[300px] border-l-transparent border-r-transparent border-b-gray-600"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div>
-              <div className="flex items-center mb-4 md:mb-6">
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded mr-2 md:mr-3 flex items-center justify-center">
-                  <div className="w-4 h-4 md:w-5 md:h-5 bg-white transform rotate-45 rounded-sm"></div>
-                </div>
-                <div>
-                  <h1 className="text-xl md:text-2xl font-bold tracking-wider">FALCONS</h1>
-                  <p className="text-xs text-gray-400 tracking-widest">CAPITAL</p>
-                </div>
+      {/* Newsletter & Footer Section */}
+      <section className="relative pt-16 pb-8 md:pt-24 md:pb-12 bg-gradient-to-b from-gray-100 via-gray-200 to-gray-400 overflow-x-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-200/80 via-gray-300/60 to-gray-400/80"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-12 md:mb-20">
+            {/* Left: Logo & Info */}
+            <div className="flex flex-col gap-8 animate-fadeInLeft">
+              <div className="flex items-center gap-4 mb-2">
+                <img src="https://svgshare.com/i/14bA.svg" alt="Falcons Capital Logo" className="h-12 w-auto" style={{filter:'drop-shadow(0 2px 8px #0002)'}} />
+                <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800">FALCONS</span>
               </div>
-              
-              <div className="space-y-3 md:space-y-4 text-gray-300 text-sm md:text-base">
-                <p>
-                  FALCONS Capital Inc., including its various divisions and subsidiaries, operates as separate legal entities providing specialized consultancy services.
-                </p>
-                <p>
-                  These services primarily encompass identifying, analyzing, and negotiating investment opportunities across various sectors in the US and globally.
-                </p>
-                <p>
-                  Our follow-up activities include board memberships, financial oversight, and comprehensive reporting efforts, all aimed at ensuring the success and sustainability of our investments.
-                </p>
+              <div className="text-gray-700 text-sm md:text-base max-w-md">
+                Falcons Capital Inc., including its various divisions and subsidiaries, operates as separate legal entities providing specialized consultancy services.<br/><br/>
+                These services primarily encompass identifying, analyzing, and negotiating investment opportunities across various sectors in the US and globally.<br/><br/>
+                Our follow-up activities include board memberships, financial oversight, and comprehensive reporting efforts, all aimed at ensuring the success and sustainability of our investments.
               </div>
             </div>
-            
-            <div>
-              <div className="mb-6 md:mb-8">
-                <h3 className="text-sm font-medium mb-3 md:mb-4 tracking-wider uppercase text-gray-400">SIGN UP TO OUR NEWSLETTER:</h3>
-                <div className="flex items-center bg-white/10 backdrop-blur-md rounded-full p-2">
+            {/* Right: Newsletter & Links */}
+            <div className="flex flex-col gap-8 animate-fadeInRight delay-300">
+              <div>
+                <h3 className="text-lg font-semibold mb-3 tracking-wider uppercase text-gray-700">SIGN UP TO OUR NEWSLETTER:</h3>
+                <form className="flex items-center bg-white/70 backdrop-blur-strong rounded-full p-2 shadow-lg max-w-xl">
                   <input
                     type="email"
                     placeholder="your@email.com"
-                    className="flex-1 bg-transparent text-white placeholder-gray-400 px-3 md:px-4 py-2 focus:outline-none text-sm md:text-lg italic"
+                    className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 px-4 py-3 focus:outline-none text-lg italic"
                   />
-                  <button className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300">
-                    <ArrowRight size={16} className="md:w-5 md:h-5" />
+                  <button type="submit" className="w-12 h-12 bg-blue-700 hover:bg-blue-800 rounded-full flex items-center justify-center transition-all duration-300">
+                    <ArrowRight size={24} className="text-white" />
                   </button>
+                </form>
+                <div className="flex items-center mt-4">
+                  <input type="checkbox" className="mr-3" />
+                  <span className="text-sm text-gray-500">I have read and accept the Terms & Privacy</span>
                 </div>
-                <div className="flex items-center mt-3 md:mt-4">
-                  <input type="checkbox" className="mr-2 md:mr-3" />
-                  <span className="text-xs md:text-sm text-gray-400">I have read and accept the Terms & Privacy</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+                <div>
+                  <h4 className="font-semibold mb-2 text-gray-700">About</h4>
+                  <ul className="space-y-1 text-gray-600 text-sm">
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">Portfolio</a></li>
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">Investments</a></li>
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">Partnering</a></li>
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">News</a></li>
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">Contact</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2 text-gray-700">Contact</h4>
+                  <ul className="space-y-1 text-gray-600 text-sm">
+                    <li>10 S. Wacker Dr., Ste. 3300</li>
+                    <li>Chicago, IL 60606</li>
+                    <li>(312) 876-7267</li>
+                    <li>info@falconscapital.com</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2 text-gray-700">Legal</h4>
+                  <ul className="space-y-1 text-gray-600 text-sm">
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">Careers</a></li>
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" className="hover:text-blue-700 transition-colors">Terms of Service</a></li>
+                  </ul>
+                  <div className="mt-4">
+                    <a href="#" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-700 hover:bg-blue-700 transition-colors">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 text-white"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8a6 6 0 01-12 0 6 6 0 0112 0zm2 8v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" /></svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          {/* Copyright */}
+          <div className="border-t border-gray-300 pt-8 mt-8 text-center text-gray-600 text-sm">
+            Copyright 2024 FALCONS Capital. All rights reserved. |
+            <span className="ml-2">Privacy Policy and Disclosures by <span className="text-blue-700">FALCONS Capital</span></span>
           </div>
         </div>
       </section>
