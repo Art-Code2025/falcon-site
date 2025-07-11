@@ -98,37 +98,65 @@ function App() {
         ref={aboutRef}
         className={`py-12 md:py-20 bg-white relative overflow-x-hidden fade-in-up-obs${isVisible['about'] ? ' visible' : ''}`}
       >
+        {/* Background decorative elements */}
+        <div className="absolute top-0 left-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-enhanced-float" />
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-30 animate-enhanced-float delay-1000" />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          {/* Steps at the top */}
+          {/* Enhanced Steps at the top */}
           <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-12 mb-10 md:mb-16">
-            <div className="text-center fade-in-up-obs stagger-1 ${isVisible['about'] ? 'visible' : ''}">
-              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.transformative')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.investments')}</div>
+            <div className={`text-center fade-in-up-obs stagger-1 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.transformative')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.investments')}</div>
             </div>
-            <div className="text-center fade-in-up-obs stagger-2 ${isVisible['about'] ? 'visible' : ''}">
-              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.strategic')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.ambition')}</div>
+            <div className={`text-center fade-in-up-obs stagger-2 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.strategic')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.ambition')}</div>
             </div>
-            <div className="text-center fade-in-up-obs stagger-3 ${isVisible['about'] ? 'visible' : ''}">
-              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.exceptional')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.teams')}</div>
+            <div className={`text-center fade-in-up-obs stagger-3 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.exceptional')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.teams')}</div>
             </div>
-            <div className="text-center fade-in-up-obs stagger-4 ${isVisible['about'] ? 'visible' : ''}">
-              <div className="text-xs md:text-sm text-gray-400 italic">{t('about.steps.impactful')}</div>
-              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700">{t('about.steps.results')}</div>
+            <div className={`text-center fade-in-up-obs stagger-4 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 transition-transform duration-300`}>
+              <div className="text-xs md:text-sm text-gray-400 italic mb-1">{t('about.steps.impactful')}</div>
+              <div className="text-base md:text-lg font-semibold tracking-wide text-gray-700 text-glow">{t('about.steps.results')}</div>
             </div>
           </div>
-          {/* Main content */}
+          
+          {/* Main content with enhanced animations */}
           <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
-            {/* Left: Text */}
-            <div>
-              <h2 className={`text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 fade-in-up-obs stagger-5 ${isVisible['about'] ? 'visible' : ''}`}> <span className="italic font-normal">{t('about.steps.transformative')}</span> {t('about.steps.investments')}</h2>
-              <p className={`text-gray-700 text-base md:text-lg mb-6 fade-in-up-obs stagger-6 ${isVisible['about'] ? 'visible' : ''}`}>{t('about.subtitle')}</p>
-              <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-7 ${isVisible['about'] ? 'visible' : ''}`}>{t('about.description')}</p>
-              <button className={`inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300 fade-in-up-obs stagger-8 ${isVisible['about'] ? 'visible' : ''}`}>{t('about.ctaButton')}<ArrowRight size={18} /></button>
+            {/* Left: Text with enhanced effects */}
+            <div className="relative">
+              {/* Decorative line */}
+              <div className="absolute top-0 left-0 w-16 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8" />
+              
+              <h2 className={`text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 fade-in-up-obs stagger-5 ${isVisible['about'] ? 'visible' : ''}`}> 
+                <span className="italic font-normal text-blue-600">{t('about.steps.transformative')}</span> {t('about.steps.investments')}
+              </h2>
+              <p className={`text-gray-700 text-base md:text-lg mb-6 fade-in-up-obs stagger-6 ${isVisible['about'] ? 'visible' : ''} leading-relaxed`}>{t('about.subtitle')}</p>
+              <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-7 ${isVisible['about'] ? 'visible' : ''} leading-relaxed`}>{t('about.description')}</p>
+              <button className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg transition-all duration-300 fade-in-up-obs stagger-8 ${isVisible['about'] ? 'visible' : ''} hover:scale-105 hover:shadow-blue-500/25 btn-shine`}>
+                {t('about.ctaButton')}
+                <ArrowRight size={18} className="animate-pulse" />
+              </button>
             </div>
-            {/* Right: Image */}
-            <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 ${isVisible['about'] ? 'visible' : ''}`}> <img src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&w=800&q=80" alt="City Skyline Business" className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100" style={{ minHeight: '260px', background: '#f3f4f6' }} /> </div>
+            
+            {/* Right: Enhanced Image with effects */}
+            <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 ${isVisible['about'] ? 'visible' : ''} relative`}> 
+              <div className="relative group">
+                <img 
+                  src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&w=800&q=80" 
+                  alt="City Skyline Business" 
+                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d" 
+                  style={{ minHeight: '260px', background: '#f3f4f6' }} 
+                />
+                {/* Overlay effect */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Floating elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 rounded-full animate-enhanced-float" />
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-500 rounded-full animate-enhanced-float delay-1000" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -137,24 +165,28 @@ function App() {
       <section
         id="services"
         ref={servicesRef}
-        className={`py-12 md:py-20 bg-white fade-in-up-obs${isVisible['services'] ? ' visible' : ''}`}
+        className={`py-12 md:py-20 bg-white fade-in-up-obs${isVisible['services'] ? ' visible' : ''} relative overflow-hidden`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 left-10 w-24 h-24 bg-green-100 rounded-full blur-3xl opacity-30 animate-enhanced-float" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-enhanced-float delay-1500" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['services'] ? 'visible' : ''}`}>
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['services'] ? 'visible' : ''} text-glow-strong`}>
               {t('services.title')}
             </h2>
-            <p className="text-lg md:text-xl text-gray-600">{t('services.subtitle')}</p>
+            <p className="text-lg md:text-xl text-gray-600 animate-fadeInUp delay-200">{t('services.subtitle')}</p>
           </div>
 
-          {/* Services Grid */}
+          {/* Enhanced Services Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['services'] ? ' visible' : ''}`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['services'] ? ' visible' : ''} group hover:scale-105`}>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded transform rotate-45"></div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{t('services.consulting.title')}</h3>
-              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.consulting.title')}</h3>
+              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
                 {t('services.consulting.description')}
               </p>
               <p className="text-xs md:text-sm text-gray-500">
@@ -162,12 +194,12 @@ function App() {
               </p>
             </div>
             
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['services'] ? ' visible' : ''}`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['services'] ? ' visible' : ''} group hover:scale-105`}>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full"></div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{t('services.support.title')}</h3>
-              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.support.title')}</h3>
+              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
                 {t('services.support.description')}
               </p>
               <p className="text-xs md:text-sm text-gray-500">
@@ -175,14 +207,17 @@ function App() {
               </p>
             </div>
             
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 fade-in-up-obs stagger-4${isVisible['services'] ? ' visible' : ''}`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 fade-in-up-obs stagger-4${isVisible['services'] ? ' visible' : ''} group hover:scale-105`}>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-sm transform rotate-12"></div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{t('services.services.title')}</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.services.title')}</h3>
               <div className="text-gray-600 mb-4 md:mb-6 text-left text-xs md:text-sm">
                 {(t('services.services.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <p key={index} className="mb-2">• {item}</p>
+                  <p key={index} className="mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
+                    {item}
+                  </p>
                 ))}
               </div>
               <p className="text-xs md:text-sm text-gray-500">
@@ -191,24 +226,27 @@ function App() {
             </div>
           </div>
 
-          {/* Large Image Section */}
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          {/* Enhanced Large Image Section */}
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
             <div 
-              className="h-64 md:h-96 bg-cover bg-center relative"
+              className="h-64 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105"
               style={{
                 backgroundImage: `url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&fit=crop')`
               }}
             >
-              <div className="absolute inset-0 bg-gray-900/60"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent group-hover:from-gray-900/70 transition-all duration-500"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center text-white px-4">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{t('services.cta.title')}</h3>
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-glow-strong">{t('services.cta.title')}</h3>
+                  <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base hover:scale-105 hover:shadow-blue-500/25 btn-shine">
                     {t('services.cta.button')}
                   </button>
                 </div>
               </div>
             </div>
+            {/* Floating elements */}
+            <div className="absolute top-4 right-4 w-6 h-6 bg-white/20 rounded-full animate-enhanced-float" />
+            <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/20 rounded-full animate-enhanced-float delay-1000" />
           </div>
         </div>
       </section>

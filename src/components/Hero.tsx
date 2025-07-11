@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
 
 type HeroProps = {
   heroImages: string[];
@@ -10,6 +9,8 @@ type HeroProps = {
 
 const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) => {
   const { t } = useTranslation();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // Preload images for better performance
   useEffect(() => {
@@ -17,19 +18,42 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
       const img = new Image();
       img.src = src;
     });
+    // Simulate loading delay for better UX
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, [heroImages]);
+
+  // Mouse parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      setMousePosition({
+        x: (clientX - innerWidth / 2) / innerWidth,
+        y: (clientY - innerHeight / 2) / innerHeight
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-gray-900 text-white overflow-hidden">
-      {/* Auto Image Slider */}
+      {/* Auto Image Slider with Enhanced Effects */}
       <div className="absolute inset-0 w-full h-full">
         {heroImages.map((img, idx) => (
           <div 
             key={img} 
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${heroIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} 
+            className={`absolute inset-0 w-full h-full transition-all duration-1500 ease-in-out ${
+              heroIndex === idx ? 'opacity-100 z-10 scale-105' : 'opacity-0 z-0 scale-100'
+            }`} 
             style={{ 
-              transitionProperty: 'opacity',
-              willChange: 'opacity'
+              transitionProperty: 'opacity, transform',
+              willChange: 'opacity, transform',
+              transform: heroIndex === idx 
+                ? `scale(1.05) translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` 
+                : 'scale(1)'
             }}
           >
             <img
@@ -39,47 +63,98 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
               loading="eager"
               onError={e => { (e.target as HTMLImageElement).src = '/fallback.jpg'; }}
             />
-            {/* Overlay Gradient ناعم فقط */}
+            {/* Enhanced Overlay Gradient */}
             {heroIndex === idx && (
               <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-transparent to-purple-900/20" />
+                {/* Animated particles effect */}
+                <div className="absolute inset-0 opacity-30">
+                  {[...Array(20)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        animationDelay: `${Math.random() * 2}s`,
+                        animationDuration: `${2 + Math.random() * 2}s`
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             )}
           </div>
         ))}
       </div>
-      {/* Hero Content */}
+
+      {/* Enhanced Hero Content with Advanced Animations */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center justify-center text-center">
-        <p className="text-blue-200 text-xs md:text-sm font-medium mb-4 tracking-widest uppercase animate-fadeInUp delay-100">
-          {t('hero.subtitle')}
-        </p>
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] animate-fadeInUp delay-200">
-          {t('hero.title')}
-        </h1>
-        <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed animate-fadeInUp delay-300">
-          {t('hero.description')}
-        </p>
-        <button
-          onClick={() => scrollToSection('contact')}
-          className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 animate-fadeInUp delay-400 hover:scale-105"
-          aria-label="Contact us section"
-        >
-          {t('hero.ctaButton')}
-        </button>
+        {/* Subtitle with typing effect */}
+        <div className={`overflow-hidden mb-4 ${isLoaded ? 'animate-slideInFromTop' : 'opacity-0'}`}>
+          <p className="text-blue-200 text-xs md:text-sm font-medium tracking-widest uppercase animate-fadeInUp delay-100 text-glow">
+            {t('hero.subtitle')}
+          </p>
+        </div>
+
+        {/* Main Title with enhanced effects */}
+        <div className={`overflow-hidden mb-6 ${isLoaded ? 'animate-slideInFromTop delay-200' : 'opacity-0'}`}>
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] animate-fadeInUp delay-300">
+            <span className="block animate-gradient-text bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent text-glow-strong">
+              {t('hero.title')}
+            </span>
+          </h1>
+        </div>
+
+        {/* Description with staggered animation */}
+        <div className={`overflow-hidden mb-8 ${isLoaded ? 'animate-slideInFromTop delay-400' : 'opacity-0'}`}>
+          <p className="text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed animate-fadeInUp delay-500">
+            {t('hero.description')}
+          </p>
+        </div>
+
+        {/* Enhanced CTA Button */}
+        <div className={`overflow-hidden ${isLoaded ? 'animate-slideInFromTop delay-600' : 'opacity-0'}`}>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="group relative bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white px-12 py-5 rounded-full text-lg font-semibold shadow-2xl transition-all duration-500 animate-fadeInUp delay-700 hover:scale-110 hover:shadow-blue-500/25 btn-shine"
+            aria-label="Contact us section"
+          >
+            <span className="relative z-10">{t('hero.ctaButton')}</span>
+            {/* Button shine effect */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -skew-x-12 -translate-x-full group-hover:translate-x-full" />
+            {/* Button glow */}
+            <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-xl group-hover:blur-2xl transition-all duration-500" />
+          </button>
+        </div>
+
+        {/* Floating elements for visual interest */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl animate-enhanced-float" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl animate-enhanced-float delay-1000" />
+        <div className="absolute top-1/2 left-5 w-16 h-16 bg-green-500/10 rounded-full blur-xl animate-enhanced-float delay-2000" />
       </div>
-      {/* Bottom Navigation Indicators - Hidden on mobile */}
+
+      {/* Enhanced Bottom Navigation Indicators */}
       <div className="absolute bottom-8 left-0 right-0 hidden md:block z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2 text-sm text-gray-200">
-              <div className="w-px h-8 bg-gray-400"></div>
-              <span>Investment Criteria</span>
+            <div className="flex items-center space-x-2 text-sm text-gray-200 animate-fadeInUp delay-800">
+              <div className="w-px h-8 bg-gradient-to-b from-transparent via-gray-400 to-transparent"></div>
+              <span className="font-medium text-glow">{t('hero.investmentCriteria')}</span>
             </div>
-            <div className="flex items-center space-x-2 text-sm text-gray-200">
-              <span>Partnering With Falcons</span>
-              <div className="w-px h-8 bg-gray-400"></div>
+            <div className="flex items-center space-x-2 text-sm text-gray-200 animate-fadeInUp delay-900">
+              <span className="font-medium text-glow">{t('hero.partneringWithFalcons')}</span>
+              <div className="w-px h-8 bg-gradient-to-b from-transparent via-gray-400 to-transparent"></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Enhanced scroll indicator */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 scroll-indicator">
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse" />
         </div>
       </div>
     </section>

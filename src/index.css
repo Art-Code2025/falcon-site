@@ -461,6 +461,17 @@ textarea:focus {
   }
 }
 
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes scaleIn {
   from {
     opacity: 0;
@@ -483,8 +494,43 @@ textarea:focus {
   }
 }
 
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    border-color: transparent;
+  }
+  51%, 100% {
+    border-color: white;
+  }
+}
+
 .animate-slideInFromBottom {
   animation: slideInFromBottom 0.8s ease-out;
+  will-change: transform, opacity;
+}
+
+.animate-slideInFromTop {
+  animation: slideInFromTop 0.8s ease-out;
   will-change: transform, opacity;
 }
 
@@ -496,6 +542,15 @@ textarea:focus {
 .animate-rotateIn {
   animation: rotateIn 0.7s ease-out;
   will-change: transform, opacity;
+}
+
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradientText 3s ease infinite;
+}
+
+.animate-typing {
+  animation: typing 2s steps(40, end), blink 0.75s step-end infinite;
 }
 
 /* Enhanced hover animations */
@@ -521,6 +576,52 @@ textarea:focus {
   90% {
     transform: translateY(-2px);
   }
+}
+
+/* Advanced button effects */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.btn-shine:hover::before {
+  left: 100%;
+}
+
+/* Particle animation */
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-particle {
+  animation: particleFloat 3s linear infinite;
+}
+
+/* Enhanced text effects */
+.text-glow {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.text-glow-strong {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
 }
 
 /* Smooth transitions for all interactive elements */
@@ -556,5 +657,46 @@ textarea:focus {
   }
   100% {
     left: 100%;
+  }
+}
+
+/* Enhanced floating animation */
+@keyframes enhancedFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg) scale(1.05);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg) scale(1.02);
+  }
+  75% {
+    transform: translateY(-15px) rotate(2deg) scale(1.08);
+  }
+}
+
+.animate-enhanced-float {
+  animation: enhancedFloat 6s ease-in-out infinite;
+}
+
+/* Parallax mouse effect */
+.parallax-mouse {
+  transition: transform 0.1s ease-out;
+}
+
+/* Enhanced scroll indicator */
+.scroll-indicator {
+  animation: scrollIndicator 2s ease-in-out infinite;
+}
+
+@keyframes scrollIndicator {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
   }
 }
