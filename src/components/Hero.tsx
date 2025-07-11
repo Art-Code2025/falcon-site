@@ -60,6 +60,10 @@ const Hero: React.FC<HeroProps> = ({ heroImages, heroIndex, scrollToSection }) =
               src={img}
               alt={"Business Hero Slide " + (idx + 1)}
               className="w-full h-full object-cover"
+              style={{
+                objectPosition: 'center',
+                minHeight: '100vh'
+              }}
               loading="eager"
               onError={e => { (e.target as HTMLImageElement).src = '/fallback.jpg'; }}
             />

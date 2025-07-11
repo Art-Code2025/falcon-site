@@ -242,8 +242,13 @@ function App() {
                 <img 
                   src="/1.png" 
                   alt="About Us" 
-                  className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll morph-shape" 
-                  style={{ minHeight: '260px', background: '#f3f4f6' }} 
+                  className="rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll morph-shape" 
+                  style={{ 
+                    minHeight: '200px',
+                    maxHeight: '300px',
+                    background: '#f3f4f6',
+                    objectPosition: 'center'
+                  }} 
                 />
                 {/* Overlay effect */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -317,21 +322,22 @@ function App() {
           {/* Enhanced Large Image Section */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl group hover-3d">
             <div 
-              className="h-64 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105 parallax-scroll"
+              className="h-48 sm:h-64 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105 parallax-scroll"
               style={{
-                backgroundImage: `url('/2.png')`
+                backgroundImage: `url('/2.png')`,
+                backgroundPosition: 'center'
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent group-hover:from-gray-900/70 transition-all duration-500"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center text-white px-4">
-                  <h3 className={`text-2xl md:text-3xl font-bold mb-4 text-glow-strong ${isVisible['services'] ? 'text-reveal' : ''}`}>
+                  <h3 className={`text-lg sm:text-2xl md:text-3xl font-bold mb-4 text-glow-strong ${isVisible['services'] ? 'text-reveal' : ''}`}>
                     Financial advice that can save you time and money.
                   </h3>
-                  <p className="text-lg mb-4">
+                  <p className="text-sm sm:text-lg mb-4">
                     Marketing experience that counts when trying to reach your customer base.
                   </p>
-                  <button className={`bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['services'] ? 'scroll-bounce' : ''}`}>
+                  <button className={`bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-4 sm:px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['services'] ? 'scroll-bounce' : ''}`}>
                     Contact Us
                   </button>
                 </div>
@@ -383,8 +389,13 @@ function App() {
               <img
                 src="/2.png"
                 alt="Business Meeting"
-                className="rounded-3xl shadow-2xl w-full max-w-lg object-cover border border-gray-100"
-                style={{ minHeight: '260px', background: '#f3f4f6' }}
+                className="rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-lg object-cover border border-gray-100"
+                style={{ 
+                  minHeight: '200px',
+                  maxHeight: '300px',
+                  background: '#f3f4f6',
+                  objectPosition: 'center'
+                }}
               />
               {/* Glass overlay for effect */}
               <div className="absolute inset-0 rounded-3xl bg-white/30 backdrop-blur-strong pointer-events-none" style={{mixBlendMode:'lighten'}}></div>
@@ -410,32 +421,47 @@ function App() {
             </p>
           </div>
           {/* Sectors grid */}
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8">
             {/* Furniture */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp">
-              <img src="/4.png" alt="Furniture" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <img 
+                src="/4.png" 
+                alt="Furniture" 
+                className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" 
+                style={{ objectPosition: 'center' }}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.furniture.category')}</h4>
-                <h3 className="text-2xl md:text-3xl font-bold">{t('sectors.furniture.title')}</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <h4 className="text-sm md:text-lg font-light text-gray-300 mb-1">{t('sectors.furniture.category')}</h4>
+                <h3 className="text-lg md:text-2xl font-bold">{t('sectors.furniture.title')}</h3>
               </div>
             </div>
             {/* Building Materials */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-200">
-              <img src="/5.png" alt="Building Materials" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <img 
+                src="/5.png" 
+                alt="Building Materials" 
+                className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" 
+                style={{ objectPosition: 'center' }}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.buildingMaterials.category')}</h4>
-                <h3 className="text-2xl md:text-3xl font-bold">{t('sectors.buildingMaterials.title')}</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <h4 className="text-sm md:text-lg font-light text-gray-300 mb-1">{t('sectors.buildingMaterials.category')}</h4>
+                <h3 className="text-lg md:text-2xl font-bold">{t('sectors.buildingMaterials.title')}</h3>
               </div>
             </div>
             {/* Cosmetics */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-400">
-              <img src="/1.png" alt="Cosmetics" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <img 
+                src="/1.png" 
+                alt="Cosmetics" 
+                className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" 
+                style={{ objectPosition: 'center' }}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.cosmetics.category')}</h4>
-                <h3 className="text-2xl md:text-3xl font-bold">{t('sectors.cosmetics.title')}</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <h4 className="text-sm md:text-lg font-light text-gray-300 mb-1">{t('sectors.cosmetics.category')}</h4>
+                <h3 className="text-lg md:text-2xl font-bold">{t('sectors.cosmetics.title')}</h3>
               </div>
             </div>
           </div>

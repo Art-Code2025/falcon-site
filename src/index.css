@@ -1030,3 +1030,47 @@ textarea:focus {
 .morph-shape {
   animation: morph 8s ease-in-out infinite;
 }
+
+/* Mobile image optimizations */
+@media (max-width: 768px) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  .object-cover {
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* Ensure images don't overflow on mobile */
+  .max-w-sm {
+    max-width: 100%;
+  }
+  
+  /* Better image quality on high DPI screens */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  }
+}
+
+/* Hero image specific optimizations */
+.hero-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+/* Ensure proper aspect ratios on mobile */
+.aspect-ratio-mobile {
+  aspect-ratio: 16/9;
+}
+
+@media (max-width: 640px) {
+  .aspect-ratio-mobile {
+    aspect-ratio: 4/3;
+  }
+}
