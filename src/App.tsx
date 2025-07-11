@@ -7,11 +7,11 @@ import Footer from './components/Footer';
 import { Helmet } from 'react-helmet';
 
 const heroImages = [
-  'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&w=1920&q=80', // handshake
-  'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&w=1920&q=80', // business meeting
-  'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&w=1920&q=80', // team discussion
-  'https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg?auto=compress&w=1920&q=80', // financial charts
-  'https://images.pexels.com/photos/3183171/pexels-photo-3183171.jpeg?auto=compress&w=1920&q=80', // consulting
+  '/1.png',
+  '/2.png', 
+  '/3.png',
+  '/4.png',
+  '/5.png'
 ];
 
 function App() {
@@ -240,7 +240,7 @@ function App() {
             <div className={`flex justify-center md:justify-end fade-in-up-obs stagger-9 scroll-rotate relative`}> 
               <div className="relative group hover-3d">
                 <img 
-                  src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&w=800&q=80" 
+                  src="/1.png" 
                   alt="About Us" 
                   className="rounded-3xl shadow-2xl w-full max-w-md object-cover border border-gray-100 transition-all duration-500 group-hover:scale-105 group-hover:shadow-3d parallax-scroll morph-shape" 
                   style={{ minHeight: '260px', background: '#f3f4f6' }} 
@@ -319,7 +319,7 @@ function App() {
             <div 
               className="h-64 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105 parallax-scroll"
               style={{
-                backgroundImage: `url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&fit=crop')`
+                backgroundImage: `url('/2.png')`
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent group-hover:from-gray-900/70 transition-all duration-500"></div>
@@ -381,7 +381,7 @@ function App() {
             {/* Right: Image with overlay */}
             <div className="relative flex justify-center md:justify-end animate-fadeInRight delay-300">
               <img
-                src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&w=900&q=80"
+                src="/2.png"
                 alt="Business Meeting"
                 className="rounded-3xl shadow-2xl w-full max-w-lg object-cover border border-gray-100"
                 style={{ minHeight: '260px', background: '#f3f4f6' }}
@@ -400,7 +400,7 @@ function App() {
         className={`relative py-12 md:py-20 bg-gray-900 text-white overflow-x-hidden fade-in-up-obs${isVisible['sectors'] ? ' visible' : ''}`}
       >
         {/* Background overlay */}
-        <div className="absolute inset-0 bg-cover bg-center opacity-40" style={{backgroundImage: `url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&w=1920&q=80')`}}></div>
+        <div className="absolute inset-0 bg-cover bg-center opacity-40" style={{backgroundImage: `url('/3.png')`}}></div>
         <div className="absolute inset-0 bg-gray-900/80"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-10 md:mb-16">
@@ -413,7 +413,7 @@ function App() {
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {/* Furniture */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp">
-              <img src="https://images.pexels.com/photos/256219/pexels-photo-256219.jpeg?auto=compress&w=800&q=80" alt="Furniture" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <img src="/4.png" alt="Furniture" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.furniture.category')}</h4>
@@ -422,7 +422,7 @@ function App() {
             </div>
             {/* Building Materials */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-200">
-              <img src="https://images.pexels.com/photos/256510/pexels-photo-256510.jpeg?auto=compress&w=800&q=80" alt="Building Materials" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <img src="/5.png" alt="Building Materials" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.buildingMaterials.category')}</h4>
@@ -431,7 +431,7 @@ function App() {
             </div>
             {/* Cosmetics */}
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-400">
-              <img src="https://images.pexels.com/photos/209251/pexels-photo-209251.jpeg?auto=compress&w=800&q=80" alt="Cosmetics" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+              <img src="/1.png" alt="Cosmetics" className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h4 className="text-lg md:text-xl font-light text-gray-300 mb-1">{t('sectors.cosmetics.category')}</h4>
