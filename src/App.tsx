@@ -8,10 +8,10 @@ import { Helmet } from 'react-helmet';
 
 const heroImages = [
   'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80', // modern building
-  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80', // corporate office
+  'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80', // handshake
   'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80', // modern office
-  'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80', // business strategy
-  'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1920&q=80'  // corporate meeting
+  'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1920&q=80', // corporate meeting
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80'  // business strategy
 ];
 
 function App() {
@@ -323,7 +323,7 @@ function App() {
             <div 
               className="h-64 sm:h-80 md:h-96 bg-cover bg-center relative transition-transform duration-700 group-hover:scale-105 parallax-scroll"
               style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1920&q=80')`,
+                backgroundImage: `url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80')`,
                 backgroundPosition: 'center',
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat'
@@ -389,7 +389,7 @@ function App() {
             <div className="relative flex justify-center md:justify-end animate-fadeInRight delay-300 w-full">
               <div className="w-full max-w-xs sm:max-w-sm md:max-w-lg">
                 <img
-                  src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80"
+                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
                   alt="Business Meeting"
                   className="rounded-3xl shadow-2xl w-full h-auto object-contain border border-gray-100"
                   style={{ 
@@ -428,7 +428,7 @@ function App() {
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp">
               <div className="aspect-square w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80" 
                   alt="Furniture" 
                   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
                 />
@@ -443,7 +443,7 @@ function App() {
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-200">
               <div className="aspect-square w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" 
                   alt="Building Materials" 
                   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
                 />
