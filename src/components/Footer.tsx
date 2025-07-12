@@ -1,21 +1,9 @@
-import React, { useState } from 'react';
-import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
+import React from 'react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setEmail('');
-    }, 2000);
-  };
   
   return (
     <section className="relative pt-16 pb-8 md:pt-24 md:pb-12 bg-gradient-to-b from-gray-100 via-gray-200 to-gray-400 overflow-x-hidden">
@@ -28,7 +16,7 @@ const Footer: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-12 md:mb-20">
           {/* Left: Enhanced Logo & Info */}
           <div className="flex flex-col gap-8 animate-fadeInLeft">
-            <div className="flex items-center gap-4 mb-2 group">
+            <div className="flex justify-center md:justify-start mb-2 group">
               <div className="relative">
                 <img 
                   src="/logo.png" 
@@ -37,7 +25,6 @@ const Footer: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <span className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800 group-hover:text-blue-600 transition-colors duration-300">FALCONS</span>
             </div>
             <div className="text-gray-700 text-sm md:text-base max-w-md leading-relaxed">
               FALCONS is a registered trading company in Hong Kong, established in 2004 with over 15 years of experience in international trade.<br/><br/>
@@ -48,40 +35,7 @@ const Footer: React.FC = () => {
           
           {/* Right: Enhanced Newsletter & Links */}
           <div className="flex flex-col gap-8 animate-fadeInRight delay-300">
-            <div>
-              <h3 className="text-lg font-semibold mb-3 tracking-wider uppercase text-gray-700 text-glow">{t('footer.newsletter.title')}</h3>
-              <form onSubmit={handleSubmit} className="flex items-center bg-white/70 backdrop-blur-strong rounded-full p-2 shadow-lg max-w-xl group hover:shadow-xl transition-all duration-300">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t('footer.newsletter.placeholder')}
-                  className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 px-4 py-3 focus:outline-none text-lg italic"
-                  required
-                />
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                    isSubmitting 
-                      ? 'bg-gray-400 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 hover:scale-110'
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <ArrowRight size={24} className="text-white" />
-                  )}
-                </button>
-              </form>
-              <div className="flex items-center mt-4">
-                <input type="checkbox" className="mr-3 accent-blue-600" />
-                <span className="text-sm text-gray-500">{t('footer.newsletter.terms')}</span>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+            <div className="grid grid-cols-2 gap-6 mt-4">
               <div className="group">
                 <h4 className="font-semibold mb-2 text-gray-700 group-hover:text-blue-600 transition-colors duration-300">{t('footer.links.about')}</h4>
                 <ul className="space-y-1 text-gray-600 text-sm">
@@ -120,33 +74,6 @@ const Footer: React.FC = () => {
                   </li>
                 </ul>
               </div>
-              
-              <div className="group">
-                <h4 className="font-semibold mb-2 text-gray-700 group-hover:text-blue-600 transition-colors duration-300">{t('footer.links.legal')}</h4>
-                <ul className="space-y-1 text-gray-600 text-sm">
-                  {['Privacy Policy', 'Terms of Service', 'Contact Us'].map((item, index) => (
-                    <li key={index}>
-                      <a 
-                        href="#" 
-                        className="hover:text-blue-700 transition-colors duration-200 hover:translate-x-1 inline-block"
-                        style={{ animationDelay: `${index * 100}ms` }}
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4">
-                  <a 
-                    href="#" 
-                    className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-gray-700 to-gray-800 hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                  >
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 text-white">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8a6 6 0 01-12 0 6 6 0 0112 0zm2 8v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -157,7 +84,7 @@ const Footer: React.FC = () => {
             {t('footer.copyright')}
           </span> |
           <span className="ml-2 hover:text-blue-600 transition-colors duration-300 cursor-pointer">
-            {t('footer.privacy')}
+            Website developed by ArtCode
           </span>
         </div>
       </div>
