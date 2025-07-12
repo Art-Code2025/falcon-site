@@ -238,8 +238,7 @@ const Portfolio: React.FC = () => {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
-              onClick={() => openModal(item)}
+              className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
