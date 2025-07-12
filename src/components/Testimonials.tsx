@@ -127,7 +127,7 @@ const Testimonials: React.FC = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section id="reviews" className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
+    <section id="reviews" className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 fade-in-up-obs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">

@@ -122,7 +122,7 @@ const Portfolio: React.FC = () => {
       titleKey: "portfolio.items.organicBeauty.title",
       category: "cosmetics",
       descriptionKey: "portfolio.items.organicBeauty.description",
-      image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=1200&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&q=80&fit=crop",
       stats: {
         clients: 95,
         revenue: "$1.5M",
@@ -171,7 +171,7 @@ const Portfolio: React.FC = () => {
   }, [isModalOpen]);
 
   return (
-    <section id="portfolio" className="py-16 md:py-24 bg-white">
+    <section id="portfolio" className="py-16 md:py-24 bg-white fade-in-up-obs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">

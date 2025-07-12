@@ -124,7 +124,7 @@ function App() {
             // Add a small delay to ensure smooth animation
             setTimeout(() => {
               element.classList.add('visible');
-            }, 50);
+            }, 100);
           }
         });
       },
