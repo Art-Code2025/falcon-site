@@ -505,9 +505,13 @@ function App() {
             <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['team'] ? 'visible' : ''}`}>
               {t('team.title')}
             </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              {t('team.subtitle')}
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
+            {/* Zailai Shouki */}
             <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['team'] ? ' visible' : ''}`}>
               <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <div className="w-8 h-8 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center">
@@ -521,6 +525,7 @@ function App() {
               </p>
             </div>
             
+            {/* Minna Gou */}
             <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['team'] ? ' visible' : ''}`}>
               <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <div className="w-8 h-8 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center">
@@ -531,6 +536,20 @@ function App() {
               <p className="text-blue-600 font-semibold mb-3 md:mb-4 text-sm md:text-base">{t('team.members.minna.position')}</p>
               <p className="text-gray-600 text-sm md:text-base">
                 {t('team.members.minna.description')}
+              </p>
+            </div>
+
+            {/* Saeed Saad Alghamdi */}
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 fade-in-up-obs stagger-4${isVisible['team'] ? ' visible' : ''} md:col-span-2 lg:col-span-1`}>
+              <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                <div className="w-8 h-8 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center">
+                  <div className="w-4 h-4 md:w-6 md:h-6 bg-purple-500 rounded-full"></div>
+                </div>
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">{t('team.members.saeed.name')}</h3>
+              <p className="text-blue-600 font-semibold mb-3 md:mb-4 text-sm md:text-base">{t('team.members.saeed.position')}</p>
+              <p className="text-gray-600 text-sm md:text-base">
+                {t('team.members.saeed.description')}
               </p>
             </div>
           </div>
@@ -595,7 +614,7 @@ function App() {
                       <Mail className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900">Email</h4>
+                      <h4 className="font-semibold text-gray-900">{t('contact.info.emailLabel')}</h4>
                       <a href="mailto:falconsmgr@hotmail.com" className="text-blue-600 hover:text-blue-700 transition-colors">
                         {t('contact.info.email')}
                       </a>
@@ -607,7 +626,7 @@ function App() {
                       <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900">Business Hours</h4>
+                      <h4 className="font-semibold text-gray-900">{t('contact.info.businessHoursLabel')}</h4>
                       <p className="text-gray-600 text-sm">{t('contact.info.hours.weekdays')}</p>
                       <p className="text-gray-600 text-sm">{t('contact.info.hours.saturday')}</p>
                     </div>
@@ -619,11 +638,11 @@ function App() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white text-center">
                   <div className="text-2xl font-bold">15+</div>
-                  <div className="text-sm opacity-90">Years Experience</div>
+                  <div className="text-sm opacity-90">{t('hero.experience')}</div>
                 </div>
                 <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white text-center">
                   <div className="text-2xl font-bold">25+</div>
-                  <div className="text-sm opacity-90">Countries Served</div>
+                  <div className="text-sm opacity-90">{t('reviews.stats.countriesServed')}</div>
                 </div>
               </div>
             </div>
@@ -637,7 +656,7 @@ function App() {
                     onClick={() => setIsContactFormOpen((prev) => !prev)}
                     className="flex items-center justify-between w-full text-left hover:bg-gray-50 p-2 rounded-lg transition-colors"
                   >
-                    <h3 className="text-2xl font-bold text-gray-900">Send us a Message</h3>
+                    <h3 className="text-2xl font-bold text-gray-900">{t('contact.form.title')}</h3>
                     <span
                       className={`inline-block transition-transform duration-300 text-blue-600 text-xl font-bold ${isContactFormOpen ? 'rotate-180' : 'rotate-0'}`}
                     >
@@ -667,71 +686,71 @@ function App() {
                   }}>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('contact.form.fullName')}</label>
                         <input 
                           type="text" 
                           name="name"
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                          placeholder="Your full name"
+                          placeholder={t('contact.form.fullNamePlaceholder')}
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('contact.form.companyName')}</label>
                         <input 
                           type="text" 
                           name="company"
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                          placeholder="Your company name"
+                          placeholder={t('contact.form.companyNamePlaceholder')}
                         />
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('contact.form.email')}</label>
                         <input 
                           type="email" 
                           name="email"
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                          placeholder="your.email@example.com"
+                          placeholder={t('contact.form.emailPlaceholder')}
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('contact.form.phone')}</label>
                         <input 
                           type="tel" 
                           name="phone"
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                          placeholder="+1 (555) 123-4567"
+                          placeholder={t('contact.form.phonePlaceholder')}
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('contact.form.message')}</label>
                       <textarea 
                         name="message"
                         required
                         rows={4}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
-                        placeholder="Tell us about your project or inquiry..."
+                        placeholder={t('contact.form.messagePlaceholder')}
                       ></textarea>
                     </div>
                     <button 
                       type="submit"
                       className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105"
                     >
-                      Send Message
+                      {t('contact.form.sendButton')}
                     </button>
                     <div className="text-center text-sm text-gray-600 mt-4">
-                      <p>Fill out the form or send a direct email to:</p>
+                      <p>{t('contact.form.directEmail')}</p>
                       <a 
                         href="mailto:falconsmgr@hotmail.com" 
                         className="text-blue-600 hover:text-blue-700 font-medium"
                       >
-                        falconsmgr@hotmail.com
+                        {t('contact.form.directEmailLink')}
                       </a>
                     </div>
                   </form>
@@ -744,8 +763,8 @@ function App() {
           <div className="mt-12 md:mt-16">
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
               <div className="p-6 md:p-8 border-b border-gray-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Our Location</h3>
-                <p className="text-gray-600">Visit our office in Guangzhou, China</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{t('contact.location.title')}</h3>
+                <p className="text-gray-600">{t('contact.location.description')}</p>
               </div>
               <div className="h-80 md:h-96">
                 <iframe

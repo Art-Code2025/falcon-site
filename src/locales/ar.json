@@ -9,7 +9,7 @@
   },
   "hero": {
     "subtitle": "Falcons",
-    "title": "نحن نبني الأعمال معك",
+    "title": "WE BUILD BUSINESS WITH YOU",  
     "description": "مع أكثر من 15 عاماً من الخبرة، نساعد الشركات على النمو.",
     "ctaButton": "اتصل بنا",
     "trading": "تجارة هونج كونج",
@@ -100,6 +100,11 @@
         "name": "مينا جو",
         "position": "مساعد تسويق",
         "description": "تتخصص مينا في علاقات العملاء والاستراتيجيات التسويقية، مما يضمن لعملائنا أفضل خدمة ودعم طوال رحلتهم."
+      },
+      "saeed": {
+        "name": "سعيد سعد الغامدي",
+        "position": "مدير الشركة التجارية",
+        "description": "يجلب سعيد خبرة واسعة في الإدارة المؤسسية والتطوير الاستراتيجي للأعمال، يشرف على شراكاتنا الدولية والحوكمة المؤسسية."
       }
     }
   },
@@ -114,10 +119,32 @@
     "info": {
       "phone": "866-20-61093893 - مينا - صقور",
       "email": "falconsmgr@hotmail.com",
+      "emailLabel": "البريد الإلكتروني",
+      "businessHoursLabel": "ساعات العمل",
       "hours": {
         "weekdays": "الاثنين إلى الجمعة من 9 صباحاً إلى 6 مساءً",
         "saturday": "السبت من 9 صباحاً إلى 1 ظهراً"
       }
+    },
+    "form": {
+      "title": "أرسل لنا رسالة",
+      "fullName": "الاسم الكامل *",
+      "fullNamePlaceholder": "اسمك الكامل",
+      "companyName": "اسم الشركة *",
+      "companyNamePlaceholder": "اسم شركتك",
+      "email": "عنوان البريد الإلكتروني *",
+      "emailPlaceholder": "بريدك.الإلكتروني@مثال.com",
+      "phone": "رقم الهاتف *",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "message": "الرسالة *",
+      "messagePlaceholder": "أخبرنا عن مشروعك أو استفسارك...",
+      "sendButton": "إرسال الرسالة",
+      "directEmail": "املأ النموذج أو أرسل بريد إلكتروني مباشر إلى:",
+      "directEmailLink": "falconsmgr@hotmail.com"
+    },
+    "location": {
+      "title": "موقعنا",
+      "description": "زر مكتبنا في قوانغتشو، الصين"
     }
   },
   "footer": {
@@ -141,6 +168,11 @@
       "furniture": "الأثاث",
       "building": "مواد البناء",
       "cosmetics": "مستحضرات التجميل"
+    },
+    "cta": {
+      "title": "هل أنت مستعد لبدء مشروعك؟",
+      "description": "دعنا نناقش كيف يمكننا مساعدتك في تحقيق أهدافك التجارية من خلال خبرتنا المثبتة وشبكتنا العالمية.",
+      "button": "ابدأ اليوم"
     },
     "items": {
       "furnitureTrading": {
@@ -268,6 +300,12 @@
   },
   "reviews": {
     "description": "اكتشف لماذا تثق الشركات الرائدة حول العالم في فالكونز لتلبية احتياجاتهم التجارية.",
+    "stats": {
+      "satisfaction": "رضا العملاء",
+      "projectsCompleted": "المشاريع المكتملة",
+      "countriesServed": "الدول المخدومة",
+      "averageRating": "متوسط التقييم"
+    },
     "testimonials": {
       "ahmed": {
         "name": "أحمد الراشد",

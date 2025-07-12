@@ -15,9 +15,20 @@ interface Testimonial {
 }
 
 const Testimonials: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Helper function to safely get translation
+  const safeTranslate = (key: string, fallback: string = '') => {
+    try {
+      const translation = t(key);
+      return translation === key ? fallback : translation;
+    } catch (error) {
+      console.warn(`Translation key not found: ${key}`);
+      return fallback;
+    }
+  };
 
   const testimonials: Testimonial[] = [
     {
@@ -123,11 +134,11 @@ const Testimonials: React.FC = () => {
           <div className="flex items-center justify-center mb-4">
             <Quote className="w-8 h-8 text-blue-600 mr-3" />
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
-              {t('navigation.reviews')}
+              {safeTranslate('navigation.reviews', 'Reviews')}
             </h2>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {t('reviews.description')}
+            {safeTranslate('reviews.description', 'Discover why leading companies worldwide trust FALCONS')}
           </p>
         </div>
 
@@ -151,7 +162,7 @@ const Testimonials: React.FC = () => {
               <div className="text-center mb-8">
                 <Quote className="w-12 h-12 text-blue-200 mx-auto mb-4" />
                 <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed italic">
-                  "{t(currentTestimonial.contentKey)}"
+                  "{safeTranslate(currentTestimonial.contentKey, 'Client testimonial')}"
                 </blockquote>
               </div>
 
@@ -159,13 +170,13 @@ const Testimonials: React.FC = () => {
               <div className="flex items-center justify-center mb-8">
                 <div className="text-center">
                   <h4 className="font-semibold text-gray-900 text-lg mb-1">
-                    {t(currentTestimonial.nameKey)}
+                    {safeTranslate(currentTestimonial.nameKey, 'Client Name')}
                   </h4>
                   <p className="text-blue-600 font-medium mb-1">
-                    {t(currentTestimonial.positionKey)}
+                    {safeTranslate(currentTestimonial.positionKey, 'Position')}
                   </p>
                   <p className="text-gray-600 text-sm">
-                    {t(currentTestimonial.companyKey)} • {t(currentTestimonial.countryKey)}
+                    {safeTranslate(currentTestimonial.companyKey, 'Company')} • {safeTranslate(currentTestimonial.countryKey, 'Country')}
                   </p>
                 </div>
               </div>
@@ -173,7 +184,7 @@ const Testimonials: React.FC = () => {
               {/* Project Info */}
               <div className="text-center">
                 <div className="inline-block bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
-                  {t('reviews.project')}: {t(currentTestimonial.projectKey)}
+                  {safeTranslate('reviews.project', 'Project')}: {safeTranslate(currentTestimonial.projectKey, 'Project Name')}
                 </div>
               </div>
             </div>
@@ -213,19 +224,19 @@ const Testimonials: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
           <div className="text-center">
             <div className="text-3xl font-bold text-blue-600 mb-2">98%</div>
-            <div className="text-gray-600">Client Satisfaction</div>
+            <div className="text-gray-600">{safeTranslate('reviews.stats.satisfaction', 'Client Satisfaction')}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-green-600 mb-2">500+</div>
-            <div className="text-gray-600">Projects Completed</div>
+            <div className="text-gray-600">{safeTranslate('reviews.stats.projectsCompleted', 'Projects Completed')}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-purple-600 mb-2">25+</div>
-            <div className="text-gray-600">Countries Served</div>
+            <div className="text-gray-600">{safeTranslate('reviews.stats.countriesServed', 'Countries Served')}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-orange-600 mb-2">5.0</div>
-            <div className="text-gray-600">Average Rating</div>
+            <div className="text-gray-600">{safeTranslate('reviews.stats.averageRating', 'Average Rating')}</div>
           </div>
         </div>
       </div>

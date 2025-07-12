@@ -20,7 +20,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
-    debug: false,
+    debug: true, // Enable debug mode to see translation issues
 
     interpolation: {
       escapeValue: false,

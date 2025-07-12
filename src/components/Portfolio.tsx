@@ -20,10 +20,21 @@ interface PortfolioItem {
 }
 
 const Portfolio: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Helper function to safely get translation
+  const safeTranslate = (key: string, fallback: string = '') => {
+    try {
+      const translation = t(key);
+      return translation === key ? fallback : translation;
+    } catch (error) {
+      console.warn(`Translation key not found: ${key}`);
+      return fallback;
+    }
+  };
 
   const portfolioItems: PortfolioItem[] = [
     {
@@ -167,11 +178,11 @@ const Portfolio: React.FC = () => {
           <div className="flex items-center justify-center mb-4">
             <Award className="w-8 h-8 text-blue-600 mr-3" />
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
-              {t('navigation.portfolio')}
+              {safeTranslate('navigation.portfolio', 'Portfolio')}
             </h2>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {t('portfolio.description')}
+            {safeTranslate('portfolio.description', 'Discover our successful trading projects and partnerships')}
           </p>
         </div>
 
@@ -202,10 +213,10 @@ const Portfolio: React.FC = () => {
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {[
-            { key: 'all', label: t('portfolio.filters.all') },
-            { key: 'furniture', label: t('portfolio.filters.furniture') },
-            { key: 'building', label: t('portfolio.filters.building') },
-            { key: 'cosmetics', label: t('portfolio.filters.cosmetics') }
+            { key: 'all', label: safeTranslate('portfolio.filters.all', 'All Projects') },
+            { key: 'furniture', label: safeTranslate('portfolio.filters.furniture', 'Furniture') },
+            { key: 'building', label: safeTranslate('portfolio.filters.building', 'Building Materials') },
+            { key: 'cosmetics', label: safeTranslate('portfolio.filters.cosmetics', 'Cosmetics') }
           ].map((filter) => (
             <button
               key={filter.key}
@@ -246,35 +257,35 @@ const Portfolio: React.FC = () => {
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {t(item.titleKey)}
+                  {safeTranslate(item.titleKey, 'Project Title')}
                 </h3>
                 <p className="text-gray-600 mb-4 line-clamp-3">
-                  {t(item.descriptionKey)}
+                  {safeTranslate(item.descriptionKey, 'Project description')}
                 </p>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">{item.stats.clients}+</div>
-                    <div className="text-sm text-gray-500">{t('portfolio.stats.clients')}</div>
+                    <div className="text-sm text-gray-500">{safeTranslate('portfolio.stats.clients', 'Clients')}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-600">{item.stats.revenue}</div>
-                    <div className="text-sm text-gray-500">{t('portfolio.stats.revenue')}</div>
+                    <div className="text-sm text-gray-500">{safeTranslate('portfolio.stats.revenue', 'Revenue')}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-yellow-600">{item.stats.satisfaction}%</div>
-                    <div className="text-sm text-gray-500">{t('portfolio.stats.satisfaction')}</div>
+                    <div className="text-sm text-gray-500">{safeTranslate('portfolio.stats.satisfaction', 'Satisfaction')}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-purple-600">{item.stats.duration}</div>
-                    <div className="text-sm text-gray-500">{t('portfolio.stats.duration')}</div>
+                    <div className="text-sm text-gray-500">{safeTranslate('portfolio.stats.duration', 'Duration')}</div>
                   </div>
                 </div>
 
                 {/* CTA */}
                 <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300">
-                  {t('portfolio.modal.viewProject')}
+                  {safeTranslate('portfolio.modal.viewProject', 'View Project')}
                 </button>
               </div>
             </div>
@@ -285,10 +296,10 @@ const Portfolio: React.FC = () => {
         <div className="text-center mt-16">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to Start Your Project?
+              {safeTranslate('portfolio.cta.title', 'Ready to Start Your Project?')}
             </h3>
             <p className="text-lg mb-6 opacity-90">
-              Let's discuss how we can help you achieve your trading goals with our proven expertise and global network.
+              {safeTranslate('portfolio.cta.description', 'Let\'s discuss how we can help you achieve your trading goals with our proven expertise and global network.')}
             </p>
             <button className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300" onClick={() => {
               const contactSection = document.getElementById('contact');
@@ -296,7 +307,7 @@ const Portfolio: React.FC = () => {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
               }
             }}>
-              Get Started Today
+              {safeTranslate('portfolio.cta.button', 'Get Started Today')}
             </button>
           </div>
         </div>
