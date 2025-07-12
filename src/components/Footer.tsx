@@ -39,14 +39,21 @@ const Footer: React.FC = () => {
               <div className="group">
                 <h4 className="font-semibold mb-2 text-gray-700 group-hover:text-blue-600 transition-colors duration-300">{t('footer.links.about')}</h4>
                 <ul className="space-y-1 text-gray-600 text-sm">
-                  {['About Us', 'Our Services', 'The Team', 'Contact'].map((item, index) => (
-                    <li key={index}>
+                  {[
+                    { key: 'about', label: t('navigation.about') },
+                    { key: 'services', label: t('navigation.services') },
+                    { key: 'portfolio', label: t('navigation.portfolio') },
+                    { key: 'team', label: t('navigation.team') },
+                    { key: 'reviews', label: t('navigation.reviews') },
+                    { key: 'contact', label: t('navigation.contact') }
+                  ].map((item, index) => (
+                    <li key={item.key}>
                       <a 
                         href="#" 
                         className="hover:text-blue-700 transition-colors duration-200 hover:translate-x-1 inline-block"
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
-                        {item}
+                        {item.label}
                       </a>
                     </li>
                   ))}

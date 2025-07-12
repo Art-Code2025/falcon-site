@@ -4,14 +4,16 @@ import { useTranslation } from 'react-i18next';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
+import Portfolio from './components/Portfolio';
+import Testimonials from './components/Testimonials';
 import { Helmet } from 'react-helmet';
 
 const heroImages = [
-  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80', // modern building
-  'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80', // handshake
-  'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80', // modern office
-  'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1920&q=80', // corporate meeting
-  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80'  // business strategy
+  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=70&fit=crop', // modern building
+  'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&q=70&fit=crop', // handshake
+  'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=70&fit=crop', // modern office
+  'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&q=70&fit=crop', // corporate meeting
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=70&fit=crop'  // business strategy
 ];
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
   const [hasAnimated, setHasAnimated] = useState<Record<string, boolean>>({});
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   // refs for sections
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -31,6 +35,14 @@ function App() {
   const sectorsRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+
+  // Loading effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Set document direction based on language
   useEffect(() => {
@@ -147,8 +159,28 @@ function App() {
   return (
     <div className={`min-h-screen bg-gray-900 ${i18n.language === 'ar' ? 'rtl' : 'ltr'}`}>
       <Helmet>
-        <title>Falcons Capital - Business Consulting & Investments</title>
-        <meta name="description" content="Falcons Capital empowers industrial growth through strategic investments and business consulting services." />
+        <title>FALCONS - Hong Kong Trading Company | Furniture, Building Materials & Cosmetics</title>
+        <meta name="description" content="FALCONS is a registered trading company in Hong Kong since 2004. We specialize in trading Furniture, Building materials and Cosmetics with direct supply from Chinese suppliers." />
+        <meta name="keywords" content="Hong Kong trading, furniture, building materials, cosmetics, Chinese suppliers, international trade" />
+        <meta name="author" content="FALCONS" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="FALCONS - Hong Kong Trading Company" />
+        <meta property="og:description" content="Specialized trading in Furniture, Building materials and Cosmetics with 15+ years experience." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://falcons-trading.com" />
+        <meta property="og:image" content="/logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="FALCONS - Hong Kong Trading Company" />
+        <meta name="twitter:description" content="Specialized trading in Furniture, Building materials and Cosmetics." />
+        
+        {/* Additional SEO */}
+        <link rel="canonical" href="https://falcons-trading.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#1e40af" />
       </Helmet>
       
       {/* Scroll Progress Indicator */}
@@ -230,7 +262,7 @@ function App() {
               <p className={`text-gray-500 text-sm md:text-base mb-8 fade-in-up-obs stagger-7 scroll-animated text-reveal ${isVisible['about'] ? 'visible' : ''} leading-relaxed`}>
                 {t('about.description')}
               </p>
-              <button className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg transition-all duration-300 fade-in-up-obs stagger-8 scroll-bounce hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['about'] ? 'visible' : ''}`}>
+              <button className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg transition-all duration-300 fade-in-up-obs stagger-8 scroll-bounce hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['about'] ? 'visible' : ''}`} onClick={() => scrollToSection('contact')}>
                 {t('about.ctaButton')}
                 <ArrowRight size={18} className="animate-pulse" />
               </button>
@@ -333,13 +365,13 @@ function App() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center text-white px-4">
                   <h3 className={`text-lg sm:text-2xl md:text-3xl font-bold mb-4 text-glow-strong ${isVisible['services'] ? 'text-reveal' : ''}`}>
-                    Financial advice that can save you time and money.
+                    {t('services.hero.title')}
                   </h3>
                   <p className="text-sm sm:text-lg mb-4">
-                    Marketing experience that counts when trying to reach your customer base.
+                    {t('services.hero.subtitle')}
                   </p>
-                  <button className={`bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-4 sm:px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['services'] ? 'scroll-bounce' : ''}`}>
-                    Contact Us
+                  <button className={`bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-4 sm:px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base hover:scale-105 hover:shadow-blue-500/25 btn-shine magnetic-hover ${isVisible['services'] ? 'scroll-bounce' : ''}`} onClick={() => scrollToSection('contact')}>
+                    {t('services.hero.button')}
                   </button>
                 </div>
               </div>
@@ -358,8 +390,8 @@ function App() {
         className={`relative py-12 md:py-20 bg-gradient-to-b from-white to-gray-100 overflow-x-hidden fade-in-up-obs${isVisible['human'] ? ' visible' : ''}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
-            {/* Left: Glassmorphism Card */}
+          <div className="max-w-4xl mx-auto">
+            {/* Glassmorphism Card */}
             <div className="relative z-10 animate-fadeInLeft">
               <div className="backdrop-blur-strong bg-white/60 border border-gray-200 rounded-3xl shadow-2xl p-8 md:p-12">
                 <div className="mb-6">
@@ -374,32 +406,15 @@ function App() {
                     {t('humanCapital.subDescription')}
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300">
+                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-semibold shadow transition-all duration-300" onClick={() => scrollToSection('services')}>
                       {t('humanCapital.buttons.services')}
                       <ArrowRight size={18} />
                     </button>
-                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/80 hover:bg-white text-blue-700 font-semibold border border-blue-700 shadow transition-all duration-300">
+                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/80 hover:bg-white text-blue-700 font-semibold border border-blue-700 shadow transition-all duration-300" onClick={() => scrollToSection('portfolio')}>
                       {t('humanCapital.buttons.readMore')}
                     </button>
                   </div>
                 </div>
-              </div>
-            </div>
-            {/* Right: Image with overlay */}
-            <div className="relative flex justify-center md:justify-end animate-fadeInRight delay-300 w-full">
-              <div className="w-full max-w-xs sm:max-w-sm md:max-w-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
-                  alt="Business Meeting"
-                  className="rounded-3xl shadow-2xl w-full h-auto object-contain border border-gray-100"
-                  style={{ 
-                    minHeight: '250px',
-                    maxHeight: '400px',
-                    background: '#f3f4f6'
-                  }}
-                />
-                {/* Glass overlay for effect */}
-                <div className="absolute inset-0 rounded-3xl bg-white/30 backdrop-blur-strong pointer-events-none" style={{mixBlendMode:'lighten'}}></div>
               </div>
             </div>
           </div>
@@ -428,9 +443,9 @@ function App() {
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp">
               <div className="aspect-square w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&fit=crop" 
                   alt="Furniture" 
-                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
@@ -443,9 +458,9 @@ function App() {
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-200">
               <div className="aspect-square w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fit=crop" 
                   alt="Building Materials" 
-                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
@@ -458,9 +473,9 @@ function App() {
             <div className="relative group rounded-2xl overflow-hidden shadow-xl animate-fadeInUp delay-400">
               <div className="aspect-square w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80&fit=crop" 
                   alt="Cosmetics" 
-                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
@@ -472,6 +487,12 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Portfolio Section */}
+      <Portfolio />
+
+      {/* Reviews Section */}
+      <Testimonials />
 
       {/* Team Section */}
       <section
@@ -520,48 +541,246 @@ function App() {
       <section
         id="contact"
         ref={contactRef}
-        className={`relative py-12 bg-white border-t border-b border-gray-200 fade-in-up-obs${isVisible['contact'] ? ' visible' : ''}`}
+        className={`relative py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white fade-in-up-obs${isVisible['contact'] ? ' visible' : ''}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-          {/* Address & Contact Info */}
-          <div className="flex-1 w-full max-w-xl animate-fadeInLeft">
-            <div className="mb-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{t('contact.address.title')}</h3>
-              <div className="text-gray-700 text-base md:text-lg mb-1">{t('contact.address.office')}</div>
-              <div className="text-gray-700 text-base md:text-lg mb-1">{t('contact.address.mobile')}</div>
+        {/* Background decorative elements */}
+        <div className="absolute top-0 left-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30 animate-enhanced-float morph-shape" />
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-30 animate-enhanced-float delay-1000 morph-shape" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Header */}
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className={`text-3xl md:text-5xl font-bold text-gray-900 mb-4 transition-all duration-1000 fade-in-up-obs stagger-1 ${isVisible['contact'] ? 'visible text-reveal' : ''} text-glow-strong`}>
+              {t('contact.title')}
+            </h2>
+            <p className={`text-lg md:text-xl text-gray-600 animate-fadeInUp delay-200 ${isVisible['contact'] ? 'scroll-slide-right' : ''}`}>
+              {t('contact.subtitle')}
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 md:gap-16">
+            {/* Left: Contact Information */}
+            <div className="space-y-8 animate-fadeInLeft">
+              {/* Office Address */}
+              <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{t('contact.address.title')}</h3>
+                    <p className="text-gray-700 mb-2">{t('contact.address.office')}</p>
+                    <p className="text-gray-600 text-sm">{t('contact.address.mobile')}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Details */}
+              <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Phone</h4>
+                      <a href="tel:8662061093893" className="text-blue-600 hover:text-blue-700 transition-colors">
+                        {t('contact.info.phone')}
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Email</h4>
+                      <a href="mailto:falconsmgr@hotmail.com" className="text-blue-600 hover:text-blue-700 transition-colors">
+                        {t('contact.info.email')}
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Business Hours</h4>
+                      <p className="text-gray-600 text-sm">{t('contact.info.hours.weekdays')}</p>
+                      <p className="text-gray-600 text-sm">{t('contact.info.hours.saturday')}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Stats */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white text-center">
+                  <div className="text-2xl font-bold">15+</div>
+                  <div className="text-sm opacity-90">Years Experience</div>
+                </div>
+                <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white text-center">
+                  <div className="text-2xl font-bold">25+</div>
+                  <div className="text-sm opacity-90">Countries Served</div>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col gap-2 text-gray-700 text-base md:text-lg">
-              <div className="flex items-center gap-2">
-                <Phone size={18} className="text-blue-700" />
-                <a href="tel:8662061093893" className="hover:underline text-blue-700">{t('contact.info.phone')}</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail size={18} className="text-blue-700" />
-                <a href="mailto:falconsmgr@hotmail.com" className="hover:underline text-blue-700">{t('contact.info.email')}</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock size={18} className="text-blue-700" />
-                <span>{t('contact.info.hours.weekdays')}</span>
-              </div>
-              <div className="flex items-center gap-2 pl-6">
-                <span>{t('contact.info.hours.saturday')}</span>
+
+            {/* Right: Contact Form */}
+            <div className="animate-fadeInRight">
+              <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100">
+                <div className="flex items-center justify-between mb-6">
+                  <button
+                    type="button"
+                    onClick={() => setIsContactFormOpen((prev) => !prev)}
+                    className="flex items-center justify-between w-full text-left hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                  >
+                    <h3 className="text-2xl font-bold text-gray-900">Send us a Message</h3>
+                    <span
+                      className={`inline-block transition-transform duration-300 text-blue-600 text-xl font-bold ${isContactFormOpen ? 'rotate-180' : 'rotate-0'}`}
+                    >
+                      ▼
+                    </span>
+                  </button>
+                </div>
+                <div
+                  style={{
+                    maxHeight: isContactFormOpen ? 1000 : 0,
+                    overflow: 'hidden',
+                    transition: 'max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                    opacity: isContactFormOpen ? 1 : 0,
+                  }}
+                >
+                  <form className="space-y-6" style={{paddingTop: isContactFormOpen ? 0 : 0}} onSubmit={(e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    const email = formData.get('email') as string;
+                    const name = formData.get('name') as string;
+                    const company = formData.get('company') as string;
+                    const phone = formData.get('phone') as string;
+                    const message = formData.get('message') as string;
+                    // Create email body
+                    const emailBody = `\nName: ${name}\nCompany: ${company}\nPhone: ${phone}\n\nMessage:\n${message}\n`;
+                    window.open(`mailto:falconsmgr@hotmail.com?subject=Contact from ${name} - ${company}&body=${encodeURIComponent(emailBody)}`);
+                  }}>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                        <input 
+                          type="text" 
+                          name="name"
+                          required
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                          placeholder="Your full name"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                        <input 
+                          type="text" 
+                          name="company"
+                          required
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                          placeholder="Your company name"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <input 
+                          type="email" 
+                          name="email"
+                          required
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                          placeholder="your.email@example.com"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                        <input 
+                          type="tel" 
+                          name="phone"
+                          required
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                          placeholder="+1 (555) 123-4567"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                      <textarea 
+                        name="message"
+                        required
+                        rows={4}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                        placeholder="Tell us about your project or inquiry..."
+                      ></textarea>
+                    </div>
+                    <button 
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105"
+                    >
+                      Send Message
+                    </button>
+                    <div className="text-center text-sm text-gray-600 mt-4">
+                      <p>Fill out the form or send a direct email to:</p>
+                      <a 
+                        href="mailto:falconsmgr@hotmail.com" 
+                        className="text-blue-600 hover:text-blue-700 font-medium"
+                      >
+                        falconsmgr@hotmail.com
+                      </a>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-          {/* Google Map */}
-          <div className="flex-1 w-full max-w-xl animate-fadeInRight">
-            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-              <iframe
-                title="Falcons Capital Location"
-                src="https://www.google.com/maps?q=Hua+Le+Lu,+Yuexiu,+Guangzhou,+Guangdong,+China&output=embed"
-                width="100%"
-                height="280"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                sandbox="allow-scripts allow-same-origin"
-              ></iframe>
+
+          {/* Map Section */}
+          <div className="mt-12 md:mt-16">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+              <div className="p-6 md:p-8 border-b border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Our Location</h3>
+                <p className="text-gray-600">Visit our office in Guangzhou, China</p>
+              </div>
+              <div className="h-80 md:h-96">
+                <iframe
+                  title="FALCONS Office Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.823084013672!2d113.2643853154321!3d23.1291639848897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3402ffb7e2b1b1b1%3A0x8e8e8e8e8e8e8e8e!2sYuexiu%20District%2C%20Guangzhou%2C%20Guangdong%20Province%2C%20China!5e0!3m2!1sen!2sus!4v1717171717171!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+              
+              {/* Navigation Buttons */}
+              <div className="flex gap-8 justify-center py-8">
+                <a 
+                  href="https://maps.google.com/?q=Hua+Le+Lu,+Yuexiu,+Guangzhou,+Guangdong,+China"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-20 h-20 rounded-full shadow-lg bg-white hover:scale-110 transition-transform duration-200"
+                  style={{ boxShadow: '0 4px 16px 0 rgba(60,60,60,0.10)' }}
+                >
+                  <img src="/Google_Maps_icon_(2020).svg.png" alt="Google Maps" className="w-14 h-14 max-w-14 max-h-14 object-contain" />
+                </a>
+                <a 
+                  href="https://waze.com/ul?q=Hua+Le+Lu,+Yuexiu,+Guangzhou,+Guangdong,+China&navigate=yes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-20 h-20 rounded-full shadow-lg bg-white hover:scale-110 transition-transform duration-200"
+                  style={{ boxShadow: '0 4px 16px 0 rgba(60,60,60,0.10)' }}
+                >
+                  <img src="/waze.svg" alt="Waze" className="w-14 h-14 object-contain" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

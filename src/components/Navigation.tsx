@@ -78,7 +78,9 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
               {[
                 { key: 'about', label: t('navigation.about') },
                 { key: 'services', label: t('navigation.services') },
+                { key: 'portfolio', label: t('navigation.portfolio') },
                 { key: 'team', label: t('navigation.team') },
+                { key: 'reviews', label: t('navigation.reviews') },
                 { key: 'contact', label: t('navigation.contact') }
               ].map((item, index) => (
                 <button 
@@ -96,21 +98,26 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
           </div>
 
           <div className="hidden md:flex items-center space-x-3 md:space-x-4">
-            <LanguageSwitcher />
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110 hover:shadow-lg">
-              <div className="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full animate-pulse"></div>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full animate-pulse"></div>
+              </div>
             </div>
           </div>
           
           <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`transition-all duration-300 hover:scale-110 ${
-                scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="flex items-center gap-3">
+              <LanguageSwitcher />
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className={`transition-all duration-300 hover:scale-110 ${
+                  scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -126,19 +133,13 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
           
           <div className="md:hidden animate-slideInFromTop z-50 relative" ref={menuRef}>
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-xl">
-              {/* Language Switcher at the top */}
-              <div className="border-b border-gray-200 pb-3 mb-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700">Language / اللغة</span>
-                  <LanguageSwitcher />
-                </div>
-              </div>
-              
               {/* Navigation Links */}
               {[
                 { key: 'about', label: t('navigation.about') },
                 { key: 'services', label: t('navigation.services') },
+                { key: 'portfolio', label: t('navigation.portfolio') },
                 { key: 'team', label: t('navigation.team') },
+                { key: 'reviews', label: t('navigation.reviews') },
                 { key: 'contact', label: t('navigation.contact') }
               ].map((item, index) => (
                 <button 
