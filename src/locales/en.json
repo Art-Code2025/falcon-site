@@ -293,7 +293,6 @@
     },
     "modal": {
       "close": "Close",
-      "viewProject": "View Project",
       "features": "Key Features",
       "technologies": "Technologies Used",
       "results": "Achieved Results"

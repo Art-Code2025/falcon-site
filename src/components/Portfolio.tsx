@@ -282,11 +282,6 @@ const Portfolio: React.FC = () => {
                     <div className="text-sm text-gray-500">{safeTranslate('portfolio.stats.duration', 'Duration')}</div>
                   </div>
                 </div>
-
-                {/* CTA */}
-                <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300">
-                  {safeTranslate('portfolio.modal.viewProject', 'View Project')}
-                </button>
               </div>
             </div>
           ))}

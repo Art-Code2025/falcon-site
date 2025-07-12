@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import Portfolio from './components/Portfolio';
 import Testimonials from './components/Testimonials';
+import WhatsAppButton from './components/WhatsAppButton';
 import { Helmet } from 'react-helmet';
 
 const heroImages = [
@@ -807,6 +808,9 @@ function App() {
       
       {/* Footer */}
       <Footer />
+      
+      {/* WhatsApp Button */}
+      <WhatsAppButton />
     </div>
   );
 }

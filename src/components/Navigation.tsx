@@ -58,16 +58,9 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, scro
                   <img 
                     src="/logo.png" 
                     alt="Falcons Logo" 
-                    className="w-12 h-12 md:w-16 md:h-16 mr-3 md:mr-4 transition-transform duration-300 group-hover:scale-110"
+                    className="w-12 h-12 md:w-16 md:h-16 transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div>
-                  <h1 className={`text-xl md:text-3xl font-bold tracking-wider transition-colors duration-300 ${
-                    scrolled ? 'text-gray-900' : 'text-white'
-                  } group-hover:text-blue-600`}>
-                    FALCONS
-                  </h1>
                 </div>
               </div>
             </div>
