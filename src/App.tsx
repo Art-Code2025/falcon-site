@@ -607,10 +607,14 @@ function App() {
   <div>
     <h4 className="font-semibold text-gray-900">Phone</h4>
     <div className="flex flex-col gap-1">
-      <a href="tel:8662061093893" className="text-blue-600 hover:text-blue-700 transition-colors">
-        866-20-61093893 - Minna - Falcons
+       <a href="tel:8662061093893" className="text-blue-600 hover:text-blue-700 transition-colors">
+        866-20-61093893 - Minna 
       </a>
-      <a href="tel:+966500081927" className="text-blue-600 hover:text-blue-700 transition-colors">
+      <a
+        href="tel:+966500081927"
+        className="text-blue-600 hover:text-blue-700 transition-colors"
+        dir="ltr"  
+      >
         +966 50 008 1927 - Saeed Saad
       </a>
     </div>
