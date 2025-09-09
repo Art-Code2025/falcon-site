@@ -601,21 +601,22 @@ function App() {
 
     {/* Phone */}
     <div className="flex items-center gap-4">
-      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-        <Phone className="w-6 h-6 text-white" />
-      </div>
-      <div>
-        <h4 className="font-semibold text-gray-900">Phone</h4>
-        <div className="flex flex-col sm:flex-row sm:gap-4 gap-1">
-          <a href="tel:8662061093893" className="text-blue-600 hover:text-blue-700 transition-colors">
-            866-20-61093893 - Minna - Falcons
-          </a>
-          <a href="tel:+966500081927" className="text-blue-600 hover:text-blue-700 transition-colors">
-            +966 50 008 1927 - Saeed Saad
-          </a>
-        </div>
-      </div>
+  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+    <Phone className="w-6 h-6 text-white" />
+  </div>
+  <div>
+    <h4 className="font-semibold text-gray-900">Phone</h4>
+    <div className="flex flex-col gap-1">
+      <a href="tel:8662061093893" className="text-blue-600 hover:text-blue-700 transition-colors">
+        866-20-61093893 - Minna - Falcons
+      </a>
+      <a href="tel:+966500081927" className="text-blue-600 hover:text-blue-700 transition-colors">
+        +966 50 008 1927 - Saeed Saad
+      </a>
     </div>
+  </div>
+</div>
+
 
     {/* Email */}
     <div className="flex items-center gap-4">
