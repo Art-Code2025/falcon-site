@@ -596,44 +596,55 @@ function App() {
               </div>
 
               {/* Contact Details */}
-              <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Phone</h4>
-                      <a href="tel:8662061093893" className="text-blue-600 hover:text-blue-700 transition-colors">
-                        {t('contact.info.phone')}
-                      </a>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{t('contact.info.emailLabel')}</h4>
-                      <a href="mailto:falconsmgr@hotmail.com" className="text-blue-600 hover:text-blue-700 transition-colors">
-                        {t('contact.info.email')}
-                      </a>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{t('contact.info.businessHoursLabel')}</h4>
-                      <p className="text-gray-600 text-sm">{t('contact.info.hours.weekdays')}</p>
-                      <p className="text-gray-600 text-sm">{t('contact.info.hours.saturday')}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
+  <div className="space-y-6">
+
+    {/* Phone */}
+    <div className="flex items-center gap-4">
+      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+        <Phone className="w-6 h-6 text-white" />
+      </div>
+      <div>
+        <h4 className="font-semibold text-gray-900">Phone</h4>
+        <div className="flex flex-col sm:flex-row sm:gap-4 gap-1">
+          <a href="tel:8662061093893" className="text-blue-600 hover:text-blue-700 transition-colors">
+            866-20-61093893 - Minna - Falcons
+          </a>
+          <a href="tel:+966500081927" className="text-blue-600 hover:text-blue-700 transition-colors">
+            +966 50 008 1927 - Saeed Saad
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Email */}
+    <div className="flex items-center gap-4">
+      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+        <Mail className="w-6 h-6 text-white" />
+      </div>
+      <div>
+        <h4 className="font-semibold text-gray-900">{t('contact.info.emailLabel')}</h4>
+        <a href="mailto:falconsmgr@hotmail.com" className="text-blue-600 hover:text-blue-700 transition-colors">
+          {t('contact.info.email')}
+        </a>
+      </div>
+    </div>
+
+    {/* Business Hours */}
+    <div className="flex items-center gap-4">
+      <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+        <Clock className="w-6 h-6 text-white" />
+      </div>
+      <div>
+        <h4 className="font-semibold text-gray-900">{t('contact.info.businessHoursLabel')}</h4>
+        <p className="text-gray-600 text-sm">{t('contact.info.hours.weekdays')}</p>
+        <p className="text-gray-600 text-sm">{t('contact.info.hours.saturday')}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
               {/* Quick Stats */}
               <div className="grid grid-cols-2 gap-4">
