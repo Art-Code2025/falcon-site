@@ -76,11 +76,13 @@ const Footer: React.FC = () => {
     <Phone size={14} className="text-blue-600" />
     866-20-61093893 - Minna
   </span>
-  <span className="flex items-center gap-2" dir="ltr">
+  <span className="flex items-center gap-2">
     <Phone size={14} className="text-blue-600" />
-    +966 50 008 1927 - Saeed Saad
+    <span dir="ltr">+966 50 008 1927</span>
+    <span className="ml-1">- Saeed Saad</span>
   </span>
 </li>
+
 
 
                   <li className="flex items-center gap-2">
