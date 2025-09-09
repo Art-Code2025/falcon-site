@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Menu, X, ArrowRight, ChevronLeft, ChevronRight, Star, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronLeft, ChevronRight, Star, Phone, Mail, MapPin, Clock ,Users, Headset,Grid} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -315,41 +315,52 @@ function App() {
 
           {/* Enhanced Services Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['services'] ? ' visible scroll-bounce' : ''} group hover:scale-105 hover-3d`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 morph-shape">
-                <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded transform rotate-45"></div>
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.consulting.title')}</h3>
-              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
-                {t('services.consulting.description')}
-              </p>
-            </div>
-            
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['services'] ? ' visible scroll-rotate' : ''} group hover:scale-105 hover-3d`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 morph-shape">
-                <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full"></div>
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.support.title')}</h3>
-              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
-                {t('services.support.description')}
-              </p>
-            </div>
-            
-            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 fade-in-up-obs stagger-4${isVisible['services'] ? ' visible scroll-scale' : ''} group hover:scale-105 hover-3d`}>
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 morph-shape">
-                <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-sm transform rotate-12"></div>
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">{t('services.services.title')}</h3>
-              <div className="text-gray-600 mb-4 md:mb-6 text-left text-xs md:text-sm">
-                {(t('services.services.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <p key={index} className="mb-2 flex items-center">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0 morph-shape"></span>
-                    {item}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
+  
+  {/* Consulting */}
+  <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-up-obs stagger-2${isVisible['services'] ? ' visible scroll-bounce' : ''} group hover:scale-105 hover-3d`}>
+    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+      <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
+    </div>
+    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">
+      {t('services.consulting.title')}
+    </h3>
+    <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+      {t('services.consulting.description')}
+    </p>
+  </div>
+
+  {/* Support */}
+  <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-200 fade-in-up-obs stagger-3${isVisible['services'] ? ' visible scroll-rotate' : ''} group hover:scale-105 hover-3d`}>
+    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+      <Headset className="w-6 h-6 md:w-8 md:h-8 text-white" />
+    </div>
+    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">
+      {t('services.support.title')}
+    </h3>
+    <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+      {t('services.support.description')}
+    </p>
+  </div>
+
+  {/* Services Items */}
+  <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-2 delay-400 sm:col-span-2 lg:col-span-1 fade-in-up-obs stagger-4${isVisible['services'] ? ' visible scroll-scale' : ''} group hover:scale-105 hover-3d`}>
+    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+      <Grid className="w-6 h-6 md:w-8 md:h-8 text-white" />
+    </div>
+    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4 text-glow">
+      {t('services.services.title')}
+    </h3>
+    <div className="text-gray-600 mb-4 md:mb-6 text-left text-xs md:text-sm">
+      {(t('services.services.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
+        <p key={index} className="mb-2 flex items-center">
+          <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0 morph-shape"></span>
+          {item}
+        </p>
+      ))}
+    </div>
+  </div>
+
+</div>
 
           {/* Enhanced Large Image Section */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl group hover-3d">
