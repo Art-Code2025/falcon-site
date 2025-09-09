@@ -71,10 +71,17 @@ const Footer: React.FC = () => {
                     <MapPin size={14} className="text-blue-600" />
                     Hua Le Lu, Yuexiu, Guangzhou, Guangdong, China
                   </li>
-                  <li className="flex items-center gap-2">
-                    <Phone size={14} className="text-blue-600" />
-                    866-20-61093893 - Minna - Falcons
-                  </li>
+                  <li className="flex flex-col gap-1">
+  <span className="flex items-center gap-2">
+    <Phone size={14} className="text-blue-600" />
+    866-20-61093893 - Minna 
+  </span>
+  <span className="flex items-center gap-2">
+    <Phone size={14} className="text-blue-600" />
+    +966 50 008 1927 - Saeed Saad
+  </span>
+</li>
+
                   <li className="flex items-center gap-2">
                     <Mail size={14} className="text-blue-600" />
                     falconsmgr@hotmail.com
